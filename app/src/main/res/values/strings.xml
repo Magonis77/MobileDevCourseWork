@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Comp1424-CourseWork</string>
+    <string name="next_command_prompt" />
+    <string name="exit_command_prompt" />
+        <string-array name="Difficulty">
+            <item>Easy</item>
+            <item>Medium</item>
+            <item>Hard</item>
+        </string-array>
 </resources>
