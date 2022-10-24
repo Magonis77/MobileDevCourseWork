@@ -98,29 +98,85 @@ public class MainActivity extends AppCompatActivity {
         dobText.setText(dob.toString());
     }
     private void getInputs() {
-        EditText HikeName = (EditText)findViewById(R.id.editTextTextPersonNameHike);
-        EditText Hikelocation = (EditText)findViewById(R.id.editTextTextPersonNameLocation);
-        TextView HikeDate =(TextView)findViewById(R.id.textViewDateSelector);
-        RadioGroup HikeParking = (RadioGroup)findViewById(R.id.radioGroup3);
-        RadioButton radioButtonInput =
-            (RadioButton)findViewById(HikeParking.getCheckedRadioButtonId());
-        EditText HikeLenght = (EditText)findViewById(R.id.editTextNumberLenghtOfHike);
-        Spinner Difficulty =(Spinner)findViewById(R.id.spinner);
-        EditText HikeDesc = (EditText)findViewById(R.id.editTextTextPersonNameDescription);
+        try {
+            EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonNameHike);
+
+            EditText Hikelocation = (EditText) findViewById(R.id.editTextTextPersonNameLocation);
+            TextView HikeDate = (TextView) findViewById(R.id.textViewDateSelector);
+            RadioGroup HikeParking = (RadioGroup) findViewById(R.id.radioGroup3);
+            RadioButton radioButtonInput =
+                    (RadioButton) findViewById(HikeParking.getCheckedRadioButtonId());
+            EditText HikeLenght = (EditText) findViewById(R.id.editTextNumberLenghtOfHike);
+            Spinner Difficulty = (Spinner) findViewById(R.id.spinner);
+            EditText HikeDesc = (EditText) findViewById(R.id.editTextTextPersonNameDescription);
 
 
+            String strName = HikeName.getText().toString(),
+                    strDifficulty = Difficulty.getSelectedItem().toString(),
+                    strParking = radioButtonInput.getText().toString(),
+                    strLenght = HikeLenght.getText().toString(),
+                    strLocation = Hikelocation.getText().toString(),
+                    strDate = HikeDate.getText().toString(),
+                    strDesc = HikeDesc.getText().toString();
+                if (strName.isEmpty() || strDifficulty.isEmpty()
+                        || strParking.isEmpty() || strLenght.isEmpty()
+                        || strLocation.isEmpty() || strDate.isEmpty()) {
+                    displaymissinginfo();
+                }
+            if (!strName.isEmpty() && !strDifficulty.isEmpty()
+                    && !strParking.isEmpty() && !strLenght.isEmpty()
+                    && !strLocation.isEmpty() && !strDate.isEmpty()
+                    && !strDesc.isEmpty()) {
+                        displayConfAlert(strName, strLocation, strDate, strParking, strLenght, strDifficulty, strDesc);
+            }
+            if (!strName.isEmpty() && !strDifficulty.isEmpty()
+                    && !strParking.isEmpty() && !strLenght.isEmpty()
+                    && !strLocation.isEmpty() && !strDate.isEmpty() && strDesc.isEmpty()) {
+
+                displayConfAlertnoDesc(strName, strLocation, strDate, strParking, strLenght, strDifficulty);
+            }
 
 
-        String strName = HikeName.getText().toString(),
-                strDifficulty = Difficulty.getSelectedItem().toString(),
-                strParking = radioButtonInput.getText().toString(),
-                strLenght = HikeLenght.getText().toString(),
-                strLocation = Hikelocation.getText().toString(),
-                strDate = HikeDate.getText().toString(),
-                strDesc = HikeDesc.getText().toString();
-        displayNextAlert(strName, strLocation, strDate, strParking, strLenght, strDifficulty, strDesc);
+        }catch(NullPointerException n){
+            displayNothingAlert();
+        }
     }
-    private void displayNextAlert(String strName, String strLocation,
+
+    private void displaymissinginfo() {
+        new AlertDialog.Builder(this).setTitle("All required fields not filled!").setMessage(
+                "Please enter details in all required fields before submiting!").setNeutralButton("Back",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).show();
+    }
+
+    private void displayNothingAlert() {
+        new AlertDialog.Builder(this).setTitle("No information entered!").setMessage(
+                "Please enter details before submiting!").setNeutralButton("Back",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).show();
+    }
+
+    private void displayConfAlertnoDesc(String strName, String strLocation,
+                                        String strDate, String strParking,
+                                        String strLenght, String strDifficulty) {
+        new AlertDialog.Builder(this).setTitle("Is the information correct?").setMessage(
+                "Details entered:\n" + "Hike Name:  " + strName
+                        + "\n" + "Location:  " + strLocation
+                        + "\n" + "Hike Date:  " + strDate
+                        + "\n" + "Parking Availability:  " + strParking
+                        + "\n" + "Hike length:  " + strLenght
+                        + "\n" + "Hike Difficulty:  " + strDifficulty).setNeutralButton("Back",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).show();
+    }
+
+    private void displayConfAlert(String strName, String strLocation,
                                   String strDate, String strParking,
                                   String strLenght, String strDifficulty,
                                   String strDesc) {
