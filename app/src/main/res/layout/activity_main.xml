@@ -7,30 +7,36 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/textViewdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date of the hike:"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="200dp" />
-
     <EditText
         android:id="@+id/editTextTextPersonNameHike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="86dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewloc"
+        app:layout_constraintStart_toStartOf="@+id/textViewname"
+        app:layout_constraintTop_toBottomOf="@+id/textViewname" />
 
     <TextView
-        android:id="@+id/textViewloc"
+        android:id="@+id/textViewDateSelector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location:"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="131dp" />
+        android:layout_marginBottom="44dp"
+        android:onClick="showDatePickerDialog"
+        android:text="Click here to Select Date"
+        app:layout_constraintBottom_toTopOf="@+id/textViewparkingavailability"
+        app:layout_constraintStart_toStartOf="@+id/textViewdate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdate" />
+
+    <TextView
+        android:id="@+id/textViewdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        android:text="Date of the hike:"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDateSelector"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameLocation"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameLocation" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameLocation"
@@ -38,90 +44,74 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="155dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewdate"
+        app:layout_constraintStart_toStartOf="@+id/textViewloc"
+        app:layout_constraintTop_toBottomOf="@+id/textViewloc" />
 
     <TextView
         android:id="@+id/textViewname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="17dp"
         android:text="Name of hike:"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="50dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameHike"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/textViewDateSelector"
+        android:id="@+id/textViewloc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="showDatePickerDialog"
-        android:text="Click here to Select Date"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="242dp" />
+        android:layout_marginBottom="5dp"
+        android:text="Location:"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameLocation"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameHike"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameHike" />
 
     <TextView
         android:id="@+id/textViewparkingavailability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:text="Parking available?"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="386dp" />
-
-    <TextView
-        android:id="@+id/textViewlenghtofhike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lenght of the hike"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="476dp" />
-
-    <TextView
-        android:id="@+id/textViewdifficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Level of difficulty:"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="543dp" />
-
-    <EditText
-        android:id="@+id/editTextNumberLenghtOfHike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="497dp" />
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup3"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroup3"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDateSelector" />
 
     <TextView
         android:id="@+id/textViewdesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="1dp"
         android:text="Description - optional"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="609dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameDescription"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <EditText
-        android:id="@+id/editTextTextPersonNameDescription"
+        android:id="@+id/editTextNumberLenghtOfHike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:layout_marginBottom="1dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="629dp" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="207dp"
-        android:layout_height="37dp"
-        android:entries="@array/Difficulty"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="565dp" />
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/textViewdifficulty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewlenghtofhike" />
 
     <RadioGroup
         android:id="@+id/radioGroup3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="410dp">
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewlenghtofhike"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike"
+        app:layout_constraintTop_toBottomOf="@+id/textViewparkingavailability">
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -136,65 +126,86 @@
             android:text="No" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/textViewdifficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="3dp"
+        android:text="Level of difficulty:"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberLenghtOfHike" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="7dp"
+        android:entries="@array/Difficulty"
+        app:layout_constraintBottom_toTopOf="@+id/textViewdesc"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNumberLenghtOfHike"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdifficulty" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="138dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewdesc"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdesc" />
+
+    <TextView
+        android:id="@+id/textViewlenghtofhike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="Lenght of the hike"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberLenghtOfHike"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroup3"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup3"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+
     <Button
         android:id="@+id/buttonsubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="9dp"
         android:text="Submit"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="674dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="411dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="36dp"
+        app:layout_constraintStart_toEndOf="@+id/toolbar" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="37dp"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="245dp"
+        android:layout_marginBottom="13dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/textViewname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="Hike Application" />
-
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time of the hike:"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="276dp" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="63dp"
-        android:layout_height="27dp"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="330dp" />
-
-    <Spinner
-        android:id="@+id/spinner4"
-        android:layout_width="63dp"
-        android:layout_height="37dp"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="306dp" />
-
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="64dp"
-        android:layout_height="37dp"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="342dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=":"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="331dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

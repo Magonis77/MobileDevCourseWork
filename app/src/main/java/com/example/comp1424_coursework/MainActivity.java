@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -169,11 +170,16 @@ public class MainActivity extends AppCompatActivity {
                         + "\n" + "Hike Date:  " + strDate
                         + "\n" + "Parking Availability:  " + strParking
                         + "\n" + "Hike length:  " + strLenght
-                        + "\n" + "Hike Difficulty:  " + strDifficulty).setNeutralButton("Back",
-                new DialogInterface.OnClickListener() {
+                        + "\n" + "Hike Difficulty:  " + strDifficulty).setNegativeButton("Back",
+                new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) { }
-                }).show();
+                }).setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                saveDetails();
+            }
+        }).show();
     }
 
     private void displayConfAlert(String strName, String strLocation,
@@ -188,11 +194,49 @@ public class MainActivity extends AppCompatActivity {
                         + "\n" + "Parking Availability:  " + strParking
                         + "\n" + "Hike length:  " + strLenght
                         + "\n" + "Hike Difficulty:  " + strDifficulty
-                        + "\n" + "Hike Description:  " + strDesc).setNeutralButton("Back",
-                new DialogInterface.OnClickListener() {
+                        + "\n" + "Hike Description:  " + strDesc).setNegativeButton("Back",
+                        new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) { }
-                }).show();
+                }).setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                saveDetails();
+            }
+        }).show();
     }
 
+    private void saveDetails() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+
+        EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonNameHike);
+
+        EditText Hikelocation = (EditText) findViewById(R.id.editTextTextPersonNameLocation);
+        TextView HikeDate = (TextView) findViewById(R.id.textViewDateSelector);
+        RadioGroup HikeParking = (RadioGroup) findViewById(R.id.radioGroup3);
+        RadioButton radioButtonInput =
+                (RadioButton) findViewById(HikeParking.getCheckedRadioButtonId());
+        EditText HikeLenght = (EditText) findViewById(R.id.editTextNumberLenghtOfHike);
+        Spinner Difficulty = (Spinner) findViewById(R.id.spinner);
+        EditText HikeDesc = (EditText) findViewById(R.id.editTextTextPersonNameDescription);
+
+
+        String strName = HikeName.getText().toString(),
+                strDifficulty = Difficulty.getSelectedItem().toString(),
+                strParking = radioButtonInput.getText().toString(),
+                strLenght = HikeLenght.getText().toString(),
+                strLocation = Hikelocation.getText().toString(),
+                strDate = HikeDate.getText().toString(),
+                strDesc = HikeDesc.getText().toString();
+
+        long hikeId = dbHelper.InsertDetails(strName, strLocation,
+                 strDate,  strParking,
+                 strLenght,  strDifficulty,
+                 strDesc);
+
+        Toast.makeText(this, "Hike has been created with id:" + hikeId, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, DetailsActivity.class);
+        startActivity(intent);
+    }
 }
