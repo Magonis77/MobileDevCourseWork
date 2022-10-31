@@ -46,6 +46,27 @@ public class HikeInputActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    private void Hikeinput() {
+        Intent intent = new Intent(this, HikeInputActivity.class);
+        startActivity(intent);
+    }
+    private void HikeList() {
+        Intent intent = new Intent(this, HikeListActivity.class);
+        startActivity(intent);
+    }
+    private void HikeObservations() {
+        Intent intent = new Intent(this, HikeObservationAddActivity.class);
+        startActivity(intent);
+    }
+    private void HikeSearch() {
+        Intent intent = new Intent(this, HikeSearchActivity.class);
+        startActivity(intent);
+    }
+    private void MainMenu() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -54,8 +75,20 @@ public class HikeInputActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.itemNext:
-                getInputs();
+            case R.id.itemCreateHike:
+                Hikeinput();
+                return true;
+            case R.id.itemHikeList:
+                HikeList();
+                return true;
+            case R.id.itemObservationsAdd:
+                HikeObservations();
+                return true;
+            case R.id.itemSearch:
+                HikeSearch();
+                return true;
+            case R.id.itemMenu:
+                MainMenu();
                 return true;
             case R.id.itemExit:
                 Toast.makeText(getApplicationContext(),

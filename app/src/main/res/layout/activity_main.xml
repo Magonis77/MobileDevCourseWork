@@ -11,24 +11,19 @@
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="411dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="36dp"
-        app:layout_constraintStart_toEndOf="@+id/toolbar" />
+        app:layout_constraintGuide_begin="56dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="245dp"
-        android:layout_marginBottom="155dp"
+        android:layout_marginBottom="71dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/buttonhikelist"
+        app:layout_constraintBottom_toTopOf="@+id/buttonHikeInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Hike Application" />
@@ -37,32 +32,32 @@
         android:id="@+id/buttonHikeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="556dp"
+        android:layout_marginBottom="36dp"
         android:text="Create Hike"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonhikelist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/buttonhikelist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="31dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="32dp"
         android:text="Hike list"
         app:layout_constraintBottom_toTopOf="@+id/buttonaddobservation"
         app:layout_constraintEnd_toEndOf="@+id/buttonaddobservation"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonHikeInput" />
 
     <Button
         android:id="@+id/buttonaddobservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="26dp"
         android:text="Add observations"
         app:layout_constraintBottom_toTopOf="@+id/buttonsearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonhikelist" />
 
@@ -71,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginBottom="319dp"
+        android:layout_marginBottom="318dp"
         android:text="Search hikes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/buttonaddobservation"

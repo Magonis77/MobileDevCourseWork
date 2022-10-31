@@ -3,12 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@id/itemNext"
-        android:title="Next"
+        android:id="@id/itemCreateHike"
+        android:title="Create Hike"
         app:showAsAction="never|withText" />
+    <item
+        android:id="@+id/itemHikeList"
+        android:title="Hike List"
+        app:showAsAction="never|withText"/>
+    <item
+        android:id="@+id/itemObservationsAdd"
+        android:title="Add Observations"
+        app:showAsAction="never|withText"/>
+    <item
+        android:id="@+id/itemSearch"
+        android:title="Search"
+        app:showAsAction="never|withText" />
+    <item
+        android:id="@+id/itemMenu"
+        android:title="Menu"
+        app:showAsAction="ifRoom|withText" />
     <item
         android:id="@id/itemExit"
         android:title="Exit"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
 
 </menu>

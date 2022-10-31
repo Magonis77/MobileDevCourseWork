@@ -1,43 +1,23 @@
 package com.example.comp1424_coursework;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.content.Intent;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class DetailsActivity extends AppCompatActivity {
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+public class HikeObservationAddActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-
-        DatabaseHelper db = new DatabaseHelper(this);
-
-        String hike = db.getDetails();
-
-        TextView detailsTxt = findViewById(R.id.detailsText);
-
-        detailsTxt.setText(hike);
-        Button back = (Button)findViewById(R.id.buttonBack);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setContentView(R.layout.activity_hike_observation_add);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar7);
         setSupportActionBar(toolbar);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              backmethod();
-            }
-        });
-
     }
 
     private void Hikeinput() {
@@ -57,10 +37,6 @@ public class DetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void MainMenu() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void backmethod() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -98,6 +74,4 @@ public class DetailsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 }
