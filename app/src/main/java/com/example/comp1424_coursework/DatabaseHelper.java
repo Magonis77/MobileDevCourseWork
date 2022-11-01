@@ -6,16 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.SimpleCursorAdapter;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "HIKE_APP.DB";
     static final int DATABASE_VERSION = 1;
-
+    Context context;
     static final String DATABASE_TABLE = "HIKES";
     static final String HIKE_ID = "_ID";
     static final String HIKE_NAME = "hike_name";
@@ -46,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         database = getWritableDatabase();
+        this.context = context;
     }
 
     @Override
@@ -104,6 +106,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return resultText;
     }
 
+    public ArrayList<Hikes> getHikes(){
 
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + DATABASE_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<Hikes> hike = new ArrayList<Hikes>();
+        while(cursor.moveToNext()){
+            Hikes hikes = new Hikes();
+            hikes.set_id(cursor.getInt(0));
+            hikes.set_hikename(cursor.getString(1));
+            hikes.set_hikelocation(cursor.getString(2));
+            hikes.set_hikedate(cursor.getString(3));
+            hikes.set_hikeparking(cursor.getString(4));
+            hikes.set_hikelenght(cursor.getString(5));
+            hikes.set_hikedifficulty(cursor.getString(6));
+            hikes.set_hikedesc(cursor.getString(7));
+            hike.add(hikes);
+        }
+        cursor.close();
+        db.close();
+        return hike;
+    }
 }
 

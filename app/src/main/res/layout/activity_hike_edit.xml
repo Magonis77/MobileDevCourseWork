@@ -6,19 +6,202 @@
     android:layout_height="match_parent"
     tools:context=".HikeEditActivity">
 
+    <TextView
+        android:id="@+id/textViewlenghtofhike3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Lenght of the hike"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberLenghtOfHike3"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike3"
+        app:layout_constraintTop_toBottomOf="@+id/radioButton3" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameDescription3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="21dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/buttonsubmit3"
+        app:layout_constraintEnd_toStartOf="@+id/buttonsubmit3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdesc3" />
+
+    <TextView
+        android:id="@+id/textViewDateSelector3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="15dp"
+        android:onClick="showDatePickerDialog"
+        android:text="Click here to Select Date"
+        app:layout_constraintBottom_toTopOf="@+id/textViewparkingavailability3"
+        app:layout_constraintStart_toStartOf="@+id/textViewparkingavailability3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdate3" />
+
+    <TextView
+        android:id="@+id/textViewloc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="Location:"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameLocation3"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameHike4"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameHike4" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewdesc3"
+        app:layout_constraintEnd_toStartOf="@+id/spinner3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner3">
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonsubmit3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="9dp"
+        android:text="Edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameDescription3" />
+
+    <TextView
+        android:id="@+id/textViewparkingavailability3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="81dp"
+        android:layout_marginBottom="45dp"
+        android:text="Parking available?"
+        app:layout_constraintBottom_toTopOf="@+id/radioButton3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDateSelector3" />
+
+    <TextView
+        android:id="@+id/textViewname4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="83dp"
+        android:layout_marginBottom="11dp"
+        android:text="Name of hike:"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameHike4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameHike4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textViewloc3"
+        app:layout_constraintStart_toStartOf="@+id/textViewname4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewname4" />
+
+    <TextView
+        android:id="@+id/textViewdifficulty3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="18dp"
+        android:text="Level of difficulty:"
+        app:layout_constraintBottom_toTopOf="@+id/spinner3"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberLenghtOfHike3" />
+
+    <TextView
+        android:id="@+id/textViewdesc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="7dp"
+        android:text="Description - optional"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameDescription3"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameDescription3"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <TextView
+        android:id="@+id/textViewdate3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:text="Date of the hike:"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDateSelector3"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameLocation3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameLocation3" />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:entries="@array/Difficulty"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="@+id/textViewdesc3"
+        app:layout_constraintStart_toStartOf="@+id/textViewdesc3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdifficulty3" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameLocation3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textViewdate3"
+        app:layout_constraintStart_toStartOf="@+id/textViewloc3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewloc3" />
+
+    <EditText
+        android:id="@+id/editTextNumberLenghtOfHike3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/textViewdifficulty3"
+        app:layout_constraintStart_toStartOf="@+id/radioButton3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewlenghtofhike3" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar5"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="245dp"
-        android:layout_marginBottom="155dp"
+        android:layout_marginBottom="16dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/buttonhikelist"
+        app:layout_constraintBottom_toTopOf="@+id/textViewname4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Hike Edit" />
+
+    <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="82dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="23dp"
+        android:text="No"
+        app:layout_constraintBottom_toTopOf="@+id/textViewlenghtofhike3"
+        app:layout_constraintStart_toStartOf="@+id/textViewparkingavailability3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewparkingavailability3" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:text="Yes"
+        app:layout_constraintBottom_toTopOf="@+id/radioButton3"
+        app:layout_constraintEnd_toEndOf="@+id/radioButton3"
+        app:layout_constraintStart_toStartOf="@+id/radioButton3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

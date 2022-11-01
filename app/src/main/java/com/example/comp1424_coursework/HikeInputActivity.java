@@ -268,7 +268,7 @@ public class HikeInputActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Hike has been created with id:" + hikeId, Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, DetailsActivity.class);
+        Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
 }
