@@ -10,12 +10,12 @@
         android:id="@+id/editTextTextPersonNameDescription3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="36dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonedit"
-        app:layout_constraintEnd_toStartOf="@+id/buttonedit" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttondelete"
+        app:layout_constraintEnd_toStartOf="@+id/buttondelete" />
 
     <TextView
         android:id="@+id/textViewdesc3"
@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
+        android:layout_marginBottom="1dp"
         android:text="Lenght of the hike"
         app:layout_constraintBottom_toTopOf="@+id/editTextNumberLenghtOfHike3"
         app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike3" />
@@ -58,7 +59,7 @@
         android:id="@+id/textViewparkingavailability3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="10dp"
         android:text="Parking available?"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintEnd_toEndOf="@+id/textViewdifficulty3"
@@ -69,11 +70,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameHike4"
@@ -90,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="9dp"
         android:text="Level of difficulty:"
         app:layout_constraintStart_toStartOf="@+id/editTextNumberLenghtOfHike3"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumberLenghtOfHike3" />
@@ -109,7 +110,7 @@
         android:id="@+id/editTextTextPersonNameLocation3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/textViewloc3"
@@ -117,13 +118,15 @@
 
     <RadioGroup
         android:id="@+id/radioGroup2"
-        android:layout_width="0dp"
+        android:layout_width="81dp"
         android:layout_height="77dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="157dp"
-        android:layout_marginBottom="158dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="157dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinner3"
-        app:layout_constraintEnd_toEndOf="@+id/textViewnameofhike"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameDescription3"
+        app:layout_constraintEnd_toEndOf="@+id/textViewlenghtofhike3"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameLocation3">
 
         <RadioButton
@@ -143,24 +146,24 @@
         android:id="@+id/spinner3"
         android:layout_width="0dp"
         android:layout_height="22dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp"
         android:entries="@array/Difficulty"
-        app:layout_constraintBottom_toTopOf="@+id/textViewdesc3"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonedit"
         app:layout_constraintEnd_toEndOf="@+id/textViewdesc3"
         app:layout_constraintStart_toStartOf="@+id/textViewdesc3"
-        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberLenghtOfHike3" />
 
     <TextView
         android:id="@+id/textViewDateSelector3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginBottom="18dp"
         android:onClick="showDatePickerDialog"
         android:text="Click here to Select Date"
-        app:layout_constraintStart_toStartOf="@+id/textViewparkingavailability3"
-        app:layout_constraintTop_toBottomOf="@+id/textViewdate3" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewparkingavailability3"
+        app:layout_constraintStart_toStartOf="@+id/textViewparkingavailability3" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -177,17 +180,17 @@
         android:id="@+id/buttonedit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="35dp"
         android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameDescription3"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="13dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -201,21 +204,35 @@
         android:id="@+id/textViewid"
         android:layout_width="41dp"
         android:layout_height="18dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="49dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameHike4"
         app:layout_constraintEnd_toEndOf="@+id/textViewnameofhike"
-        app:layout_constraintStart_toStartOf="@+id/textViewnameofhike"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="2dp"
         android:text="ID: "
         app:layout_constraintBaseline_toBaselineOf="@+id/textViewid"
-        app:layout_constraintEnd_toStartOf="@+id/textViewid" />
+        app:layout_constraintStart_toStartOf="@+id/textViewnameofhike" />
+
+    <Button
+        android:id="@+id/buttondelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="7dp"
+        android:text="DELETE"
+        android:textColor="#FF0303"
+        android:textColorHint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

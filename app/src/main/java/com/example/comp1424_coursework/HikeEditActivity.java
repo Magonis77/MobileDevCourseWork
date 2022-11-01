@@ -46,7 +46,7 @@ public class HikeEditActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar5);
         setSupportActionBar(toolbar);
 
-        Button edit = (Button)findViewById(R.id.buttonedit);
+        Button edit = (Button) findViewById(R.id.buttonedit);
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +55,14 @@ public class HikeEditActivity extends AppCompatActivity {
             }
         });
 
+        Button delete = (Button) findViewById(R.id.buttondelete);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displaydeletenotification();
+            }
+        });
 
 
         id = getIntent().getExtras().getInt("id");
@@ -88,7 +96,7 @@ public class HikeEditActivity extends AppCompatActivity {
                     tvparkingno.setChecked(true);
                     break;
             }
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
 
         }
         tvLenght.setText(lenght);
@@ -100,7 +108,7 @@ public class HikeEditActivity extends AppCompatActivity {
             } else if (difficulty.equals("Hard")) {
                 tvDifficulty.setSelection(2);
             }
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
 
         }
         tvdescription.setText(description);
@@ -122,7 +130,7 @@ public class HikeEditActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             LocalDate dob = LocalDate.of(year, ++month, day);
-            ((HikeInputActivity)getActivity()).updateDOB(dob);
+            ((HikeEditActivity)getActivity()).updateDOB(dob);
 
         }
 
@@ -163,6 +171,8 @@ public class HikeEditActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     private void getInputs() {
         try {
@@ -272,6 +282,35 @@ public class HikeEditActivity extends AppCompatActivity {
         }).show();
     }
 
+    private void displaydeletenotification() {
+        new AlertDialog.Builder(this).setTitle("Are you sure you want to delete this hike?").setMessage(
+                "If you delete the hike won't be recoverable!").setNegativeButton("Back",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DeleteEntry();
+            }
+        }).show();
+    }
+
+    private void DeleteEntry() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        TextView id = (TextView) findViewById(R.id.textViewid);
+
+        String strid = id.getText().toString();
+
+        long hikeId = dbHelper.DeleteEntry(strid);
+
+        Toast.makeText(this, "Hike has been Deleted with id:" + hikeId, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, HikeListActivity.class);
+        startActivity(intent);
+
+    }
+
     private void saveDetails() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
@@ -307,6 +346,7 @@ public class HikeEditActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

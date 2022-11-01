@@ -117,7 +117,7 @@ public class HikeInputActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             LocalDate dob = LocalDate.of(year, ++month, day);
-            ((HikeEditActivity)getActivity()).updateDOB(dob);
+            ((HikeInputActivity)getActivity()).updateDOB(dob);
 
         }
 

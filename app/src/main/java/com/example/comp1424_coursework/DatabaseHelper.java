@@ -144,5 +144,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return  database.update(DATABASE_TABLE, rowValues, "_id = " + id, null);
     }
+
+    public long DeleteEntry(String strid) {
+        int id = Integer.parseInt(strid);
+
+        return  database.delete(DATABASE_TABLE, "_id = " + id, null);
+    }
 }
 

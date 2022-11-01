@@ -9,11 +9,9 @@
         android:id="@+id/textview_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/textview_name"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,73 +19,64 @@
         android:id="@+id/textview_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="38dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/textView_location"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView_lenght"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_parking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/textView_lenght"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_id" />
+        app:layout_constraintStart_toStartOf="@+id/textview_name"
+        app:layout_constraintTop_toBottomOf="@+id/textview_name" />
 
     <TextView
         android:id="@+id/textView_Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="136dp"
+        android:layout_marginTop="7dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView_lenght"
         app:layout_constraintTop_toBottomOf="@+id/textView_lenght" />
-
-    <TextView
-        android:id="@+id/textView_lenght"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="196dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_location" />
 
     <TextView
         android:id="@+id/textView_diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="7dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/textView_Date"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView_parking"
         app:layout_constraintTop_toBottomOf="@+id/textView_parking" />
+
+    <TextView
+        android:id="@+id/textView_parking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/textView_Date"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Date" />
 
     <TextView
         android:id="@+id/textView_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="7dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView_diff"
         app:layout_constraintTop_toBottomOf="@+id/textView_diff" />
+
+    <TextView
+        android:id="@+id/textView_lenght"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/textView_location"
+        app:layout_constraintTop_toBottomOf="@+id/textView_location" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
