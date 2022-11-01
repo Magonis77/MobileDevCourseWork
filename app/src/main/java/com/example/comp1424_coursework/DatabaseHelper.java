@@ -128,5 +128,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return hike;
     }
+
+    public long AmendDetails(String strid, String strName, String strLocation, String strDate, String strParking, String strLenght, String strDifficulty, String strDesc) {
+        ContentValues rowValues = new ContentValues();
+
+        rowValues.put(HIKE_NAME, strName);
+        rowValues.put(HIKE_LOCATION, strLocation);
+        rowValues.put(HIKE_DATE, strDate);
+        rowValues.put(HIKE_PARKING, strParking);
+        rowValues.put(HIKE_LENGTH, strLenght);
+        rowValues.put(HIKE_DIFFICULTY, strDifficulty);
+        rowValues.put(HIKE_DESC, strDesc);
+
+        int id = Integer.parseInt(strid);
+
+        return  database.update(DATABASE_TABLE, rowValues, "_id = " + id, null);
+    }
 }
 

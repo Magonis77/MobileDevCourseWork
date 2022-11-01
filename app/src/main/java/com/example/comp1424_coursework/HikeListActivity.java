@@ -41,6 +41,7 @@ public class HikeListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Hikes hikes = adapter.getItem(position);
+                int id2 = hikes.get_id();
                 String name = hikes.get_hikename();
                 String location = hikes.get_hikelocation();
                 String date = hikes.get_hikedate();
@@ -49,6 +50,7 @@ public class HikeListActivity extends AppCompatActivity {
                 String difficulty = hikes.get_hikedifficulty();
                 String description = hikes.get_hikedesc();
                 Intent intent = new Intent(HikeListActivity.this, HikeEditActivity.class);
+                intent.putExtra("id2", id2);
                 intent.putExtra("id", id);
                 intent.putExtra("name", name);
                 intent.putExtra("location", location);
