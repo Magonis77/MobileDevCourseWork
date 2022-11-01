@@ -306,7 +306,7 @@ public class HikeEditActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Hike has been Deleted with id:" + hikeId, Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, HikeListActivity.class);
+        Intent intent = new Intent(this, HikeEditActivity.class);
         startActivity(intent);
 
     }

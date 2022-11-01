@@ -150,5 +150,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return  database.delete(DATABASE_TABLE, "_id = " + id, null);
     }
+
+    public void deleteALL() {
+
+        database.delete(DATABASE_TABLE, null, null);
+    }
 }
 

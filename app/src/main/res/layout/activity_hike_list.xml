@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".HikeListActivity">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar6"
         android:layout_width="411dp"
         android:layout_height="56dp"
+        android:layout_marginTop="5dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -19,15 +21,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Hike List" />
 
-
     <ListView
         android:id="@+id/list_view"
         android:layout_width="413dp"
-        android:layout_height="677dp"
+        android:layout_height="604dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="1dp"
         android:dividerHeight="1dp"
         android:minHeight="48dp"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar6"></ListView>
@@ -37,9 +39,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="712dp"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <Button
+        android:id="@+id/buttondeleteall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Delete All"
+        android:textColor="#C50101"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/toolbar6"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/list_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

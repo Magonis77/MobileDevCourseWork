@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,16 @@ public class HikeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hike_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar6);
+
+        Button save = (Button)findViewById(R.id.buttondeleteall);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Deletedatabasealert();
+            }
+        });
+
         setSupportActionBar(toolbar);
         //get db
         DatabaseHelper dbHandler = new DatabaseHelper(this);
@@ -64,6 +77,32 @@ public class HikeListActivity extends AppCompatActivity {
                 Toast.makeText(HikeListActivity.this, name, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void Deletedatabasealert() {
+        new AlertDialog.Builder(this).setTitle("Are you sure you want to delete all?").setMessage(
+                "If you delete the hikes won't be recoverable!").setNegativeButton("Back",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DeleteAllDB();
+            }
+        }).show();
+
+    }
+
+    private void DeleteAllDB() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+
+        dbHelper.deleteALL();
+
+        Toast.makeText(this, "Hikes has been Deleted", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
