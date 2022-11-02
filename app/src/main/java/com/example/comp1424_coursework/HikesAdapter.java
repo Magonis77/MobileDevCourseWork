@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class HikesAdapter extends ArrayAdapter<Hikes> {
@@ -25,6 +27,8 @@ public class HikesAdapter extends ArrayAdapter<Hikes> {
         TextView parking;
         TextView lenght;
         TextView difficulty;
+        TextView weather;
+        TextView heartrate;
         TextView description;
     }
 
@@ -53,6 +57,8 @@ public class HikesAdapter extends ArrayAdapter<Hikes> {
             viewHolder.parking = (TextView) convertView.findViewById(R.id.textView_parking);
             viewHolder.lenght = (TextView) convertView.findViewById(R.id.textView_lenght);
             viewHolder.difficulty = (TextView) convertView.findViewById(R.id.textView_diff);
+            viewHolder.weather = (TextView) convertView.findViewById(R.id.textViewweather);
+            viewHolder.heartrate = (TextView) convertView.findViewById(R.id.textViewheartrate);
             viewHolder.description = (TextView) convertView.findViewById(R.id.textView_desc);
             // Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);
@@ -62,14 +68,16 @@ public class HikesAdapter extends ArrayAdapter<Hikes> {
         }
         // Populate the data from the data object via the viewHolder object
         // into the template view.
-        viewHolder.id.setText("id:" + hikes.get_id());
-        viewHolder.name.setText("name: " + hikes.get_hikename());
-        viewHolder.location.setText("location: " + hikes.get_hikelocation());
-        viewHolder.date.setText("date: " + hikes.get_hikedate());
-        viewHolder.parking.setText("parking: " + hikes.get_hikeparking());
-        viewHolder.lenght.setText("lenght: " + hikes.get_hikelenght());
-        viewHolder.difficulty.setText("difficulty: " + hikes.get_hikedifficulty());
-        viewHolder.description.setText("description: " + hikes.get_hikedesc());
+        viewHolder.id.setText("Id:" + hikes.get_id());
+        viewHolder.name.setText("Name: " + hikes.get_hikename());
+        viewHolder.location.setText("Location: " + hikes.get_hikelocation());
+        viewHolder.date.setText("Date: " + hikes.get_hikedate());
+        viewHolder.parking.setText("Parking: " + hikes.get_hikeparking());
+        viewHolder.lenght.setText("Lenght: " + hikes.get_hikelenght());
+        viewHolder.difficulty.setText("Difficulty: " + hikes.get_hikedifficulty());
+        viewHolder.weather.setText("Weather: " + hikes.get_hikeweather());
+        viewHolder.heartrate.setText("Heart Rate: " + hikes.get_hikeheartrate());
+        viewHolder.description.setText("Description: " + hikes.get_hikedesc());
         // Return the completed view to render on screen
         return convertView;
     }

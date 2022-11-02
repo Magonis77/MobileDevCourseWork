@@ -9,13 +9,15 @@ public class Hikes {
     private String _hikelenght;
     private String _hikedifficulty;
     private String _hikedesc;
+    private String _hikeweather;
+    private String _hikeheartrate;
 
     public Hikes(){
 
     }
     public Hikes(String hikename, String hikelocation,String hikedate,
                  String hikeParking, String hikelenght, String hikedifficulty,
-                 String hikedesc){
+                 String hikeweather, String hikeheartrate, String hikedesc){
     this._hikename = hikename;
     this._hikelocation = hikelocation;
     this._hikedate = hikedate;
@@ -23,6 +25,8 @@ public class Hikes {
     this._hikelenght = hikelenght;
     this._hikedifficulty = hikedifficulty;
     this._hikedesc = hikedesc;
+    this._hikeweather = hikeweather;
+    this._hikeheartrate = hikeheartrate;
     }
     public int get_id(){
         return _id;
@@ -65,6 +69,18 @@ public class Hikes {
     }
     public String get_hikedifficulty(){
         return _hikedifficulty;
+    }
+    public String get_hikeweather(){
+        return _hikeweather;
+    }
+    public void set_hikeweather(String _hikeweather){
+        this._hikeweather = _hikeweather;
+    }
+    public void set_hikeheartrate(String _hikeheartrate){
+        this._hikeheartrate = _hikeheartrate;
+    }
+    public String get_hikeheartrate(){
+        return _hikeheartrate;
     }
     public void set_hikedesc(String _hikedesc){
         this._hikedesc = _hikedesc;

@@ -19,19 +19,20 @@
         android:id="@+id/textview_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="3dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textview_id"
+        app:layout_constraintTop_toBottomOf="@+id/textview_id" />
 
     <TextView
         android:id="@+id/textView_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="9dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textview_name"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_name" />
 
     <TextView
@@ -47,10 +48,11 @@
         android:id="@+id/textView_diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="7dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView_parking"
-        app:layout_constraintTop_toBottomOf="@+id/textView_parking" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewweather"
+        app:layout_constraintStart_toStartOf="@+id/textViewweather" />
 
     <TextView
         android:id="@+id/textView_parking"
@@ -65,10 +67,10 @@
         android:id="@+id/textView_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView_diff"
-        app:layout_constraintTop_toBottomOf="@+id/textView_diff" />
+        app:layout_constraintStart_toStartOf="@+id/textViewheartrate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewheartrate" />
 
     <TextView
         android:id="@+id/textView_lenght"
@@ -78,5 +80,25 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/textView_location"
         app:layout_constraintTop_toBottomOf="@+id/textView_location" />
+
+    <TextView
+        android:id="@+id/textViewweather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="34dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_parking" />
+
+    <TextView
+        android:id="@+id/textViewheartrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="7dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/textViewweather"
+        app:layout_constraintTop_toBottomOf="@+id/textViewweather" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String HIKE_PARKING = "hike_parking";
     static final String HIKE_LENGTH = "hike_length";
     static final String HIKE_DIFFICULTY = "hike_difficulty";
+    static final String HIKE_WEATHER = "hike_weather";
+    static final String HIKE_HEARTRATE = "hike_degree";
     static final String HIKE_DESC = "hike_desc";
 
     private SQLiteDatabase database;
@@ -38,9 +40,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT, " +
                     " %s TEXT, " +
                     " %s TEXT, " +
+                    " %s TEXT, " +
+                    " %s TEXT, " +
                     " %s TEXT)",
             DATABASE_TABLE, HIKE_ID, HIKE_NAME, HIKE_LOCATION,HIKE_DATE,
-            HIKE_PARKING,HIKE_LENGTH,HIKE_DIFFICULTY,HIKE_DESC
+            HIKE_PARKING,HIKE_LENGTH,HIKE_DIFFICULTY,HIKE_WEATHER,HIKE_HEARTRATE,HIKE_DESC
     );
 
 
@@ -66,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long InsertDetails(String hike_name, String hike_location, String hike_date, String hike_parking,
-                              String hike_length, String hike_difficulty, String hike_desc){
+                              String hike_length, String hike_difficulty,String hike_weather, String hike_heartrate, String hike_desc){
         ContentValues rowValues = new ContentValues();
 
         rowValues.put(HIKE_NAME, hike_name);
@@ -75,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(HIKE_PARKING, hike_parking);
         rowValues.put(HIKE_LENGTH, hike_length);
         rowValues.put(HIKE_DIFFICULTY, hike_difficulty);
+        rowValues.put(HIKE_WEATHER, hike_weather);
+        rowValues.put(HIKE_HEARTRATE, hike_heartrate);
         rowValues.put(HIKE_DESC, hike_desc);
 
         return  database.insertOrThrow(DATABASE_TABLE, null, rowValues);
@@ -82,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String getDetails() {
         Cursor results = database.query("HIKES", new String[] {"_ID","hike_name","hike_location",
-                        "hike_date","hike_parking","hike_length","hike_difficulty","hike_desc"},
+                        "hike_date","hike_parking","hike_length","hike_difficulty","hike_weather","hike_heartrate","hike_desc"},
                 null,null,null,null,"_ID");
         String resultText = "";
 
@@ -95,11 +101,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String hike_parking = results.getString(4);
             String hike_length = results.getString(5);
             String hike_difficulty = results.getString(6);
-            String hike_desc = results.getString(7);
+            String hike_weather = results.getString(7);
+            String hike_degree = results.getString(8);
+            String hike_desc = results.getString(9);
 
             resultText += id + " " + hike_name + " " + hike_location + " "
                     + hike_date + " " + hike_parking + " " + hike_length
-                    + " " + hike_difficulty + " " + hike_desc + "\n";
+                    + " " + hike_difficulty + " " + hike_weather + " "
+                    + hike_degree + " " + hike_desc + "\n";
 
             results.moveToNext();
         }
@@ -121,7 +130,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             hikes.set_hikeparking(cursor.getString(4));
             hikes.set_hikelenght(cursor.getString(5));
             hikes.set_hikedifficulty(cursor.getString(6));
-            hikes.set_hikedesc(cursor.getString(7));
+            hikes.set_hikeweather(cursor.getString(7));
+            hikes.set_hikeheartrate(cursor.getString(8));
+            hikes.set_hikedesc(cursor.getString(9));
             hike.add(hikes);
         }
         cursor.close();
@@ -129,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return hike;
     }
 
-    public long AmendDetails(String strid, String strName, String strLocation, String strDate, String strParking, String strLenght, String strDifficulty, String strDesc) {
+    public long AmendDetails(String strid, String strName, String strLocation, String strDate, String strParking, String strLenght, String strDifficulty,String strWeather, String strHeartRate, String strDesc) {
         ContentValues rowValues = new ContentValues();
 
         rowValues.put(HIKE_NAME, strName);
@@ -138,6 +149,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(HIKE_PARKING, strParking);
         rowValues.put(HIKE_LENGTH, strLenght);
         rowValues.put(HIKE_DIFFICULTY, strDifficulty);
+        rowValues.put(HIKE_WEATHER, strWeather);
+        rowValues.put(HIKE_HEARTRATE, strHeartRate);
         rowValues.put(HIKE_DESC, strDesc);
 
         int id = Integer.parseInt(strid);

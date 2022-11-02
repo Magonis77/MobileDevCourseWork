@@ -37,6 +37,8 @@ public class HikeEditActivity extends AppCompatActivity {
     RadioButton tvparkingyes;
     RadioButton tvparkingno;
     Spinner tvDifficulty;
+    TextView tvWeather;
+    TextView tvHeartRate;
     TextView tvid;
 
     @Override
@@ -73,6 +75,8 @@ public class HikeEditActivity extends AppCompatActivity {
         String parking = getIntent().getExtras().getString("parking");
         String lenght = getIntent().getExtras().getString("lenght");
         String difficulty = getIntent().getExtras().getString("difficulty");
+        String weather = getIntent().getExtras().getString("weather");
+        String heartrate = getIntent().getExtras().getString("heartrate");
         String description = getIntent().getExtras().getString("description");
         tvname = findViewById(R.id.editTextTextPersonNameHike4);
         tvlocation = findViewById(R.id.editTextTextPersonNameLocation3);
@@ -81,11 +85,15 @@ public class HikeEditActivity extends AppCompatActivity {
         tvparkingno = findViewById(R.id.radioButton4);
         tvLenght = findViewById(R.id.editTextNumberLenghtOfHike3);
         tvDifficulty = findViewById(R.id.spinner3);
+        tvWeather = findViewById(R.id.editTextTextPersonWeather2);
+        tvHeartRate = findViewById(R.id.editTextNumberHeartRate2);
         tvdescription = findViewById(R.id.editTextTextPersonNameDescription3);
         tvid = findViewById(R.id.textViewid);
         tvid.setText(String.valueOf(id2));
         tvname.setText(name);
         tvlocation.setText(location);
+        tvWeather.setText(weather);
+        tvHeartRate.setText(heartrate);
         tvDate.setText(date);
         try {
             switch (parking) {
@@ -185,6 +193,9 @@ public class HikeEditActivity extends AppCompatActivity {
                     (RadioButton) findViewById(HikeParking.getCheckedRadioButtonId());
             EditText HikeLenght = (EditText) findViewById(R.id.editTextNumberLenghtOfHike3);
             Spinner Difficulty = (Spinner) findViewById(R.id.spinner3);
+            EditText Weather = (EditText) findViewById(R.id.editTextTextPersonWeather2);
+            EditText HeartRate = (EditText) findViewById(R.id.editTextNumberHeartRate2);
+
             EditText HikeDesc = (EditText) findViewById(R.id.editTextTextPersonNameDescription3);
 
 
@@ -194,23 +205,25 @@ public class HikeEditActivity extends AppCompatActivity {
                     strLenght = HikeLenght.getText().toString(),
                     strLocation = Hikelocation.getText().toString(),
                     strDate = HikeDate.getText().toString(),
+                    strWeather = Weather.getText().toString(),
+                    strHeartRate = HeartRate.getText().toString(),
                     strDesc = HikeDesc.getText().toString();
             if (strName.isEmpty() || strDifficulty.isEmpty()
                     || strParking.isEmpty() || strLenght.isEmpty()
-                    || strLocation.isEmpty() || strDate.isEmpty()) {
+                    || strLocation.isEmpty() || strDate.isEmpty() || strWeather.isEmpty() || strHeartRate.isEmpty()) {
                 displaymissinginfo();
             }
             if (!strName.isEmpty() && !strDifficulty.isEmpty()
                     && !strParking.isEmpty() && !strLenght.isEmpty()
-                    && !strLocation.isEmpty() && !strDate.isEmpty()
+                    && !strLocation.isEmpty() && !strDate.isEmpty() && !strWeather.isEmpty() && !strHeartRate.isEmpty()
                     && !strDesc.isEmpty()) {
-                displayConfAlert(strName, strLocation, strDate, strParking, strLenght, strDifficulty, strDesc);
+                displayConfAlert(strName, strLocation, strDate, strParking, strLenght, strDifficulty,strWeather,strHeartRate, strDesc);
             }
             if (!strName.isEmpty() && !strDifficulty.isEmpty()
                     && !strParking.isEmpty() && !strLenght.isEmpty()
-                    && !strLocation.isEmpty() && !strDate.isEmpty() && strDesc.isEmpty()) {
+                    && !strLocation.isEmpty() && !strDate.isEmpty() && !strWeather.isEmpty() && !strHeartRate.isEmpty() && strDesc.isEmpty()) {
 
-                displayConfAlertnoDesc(strName, strLocation, strDate, strParking, strLenght, strDifficulty);
+                displayConfAlertnoDesc(strName, strLocation, strDate, strParking, strLenght,strWeather,strHeartRate, strDifficulty);
             }
 
 
@@ -239,14 +252,17 @@ public class HikeEditActivity extends AppCompatActivity {
 
     private void displayConfAlertnoDesc(String strName, String strLocation,
                                         String strDate, String strParking,
-                                        String strLenght, String strDifficulty) {
+                                        String strLenght,String strWeather,String strHeartRate, String strDifficulty) {
         new AlertDialog.Builder(this).setTitle("Is the information correct?").setMessage(
                 "Details entered:\n" + "Hike Name:  " + strName
                         + "\n" + "Location:  " + strLocation
                         + "\n" + "Hike Date:  " + strDate
                         + "\n" + "Parking Availability:  " + strParking
                         + "\n" + "Hike length:  " + strLenght
-                        + "\n" + "Hike Difficulty:  " + strDifficulty).setNegativeButton("Back",
+                        + "\n" + "Hike Difficulty:  "+ strDifficulty
+                        + "\n" + "Hike Weather:  " + strWeather
+                        + "\n" + "Hike Heart Rate:  " + strHeartRate
+        ).setNegativeButton("Back",
                 new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) { }
@@ -261,6 +277,7 @@ public class HikeEditActivity extends AppCompatActivity {
     private void displayConfAlert(String strName, String strLocation,
                                   String strDate, String strParking,
                                   String strLenght, String strDifficulty,
+                                  String strWeather, String strHeartRate,
                                   String strDesc) {
 
         new AlertDialog.Builder(this).setTitle("Is the information correct?").setMessage(
@@ -270,6 +287,8 @@ public class HikeEditActivity extends AppCompatActivity {
                         + "\n" + "Parking Availability:  " + strParking
                         + "\n" + "Hike length:  " + strLenght
                         + "\n" + "Hike Difficulty:  " + strDifficulty
+                        + "\n" + "Hike Weather:  " + strWeather
+                        + "\n" + "Hike Heart Rate:  " + strHeartRate
                         + "\n" + "Hike Description:  " + strDesc).setNegativeButton("Back",
                 new DialogInterface.OnClickListener(){
                     @Override
@@ -302,11 +321,9 @@ public class HikeEditActivity extends AppCompatActivity {
 
         String strid = id.getText().toString();
 
-        long hikeId = dbHelper.DeleteEntry(strid);
+        dbHelper.DeleteEntry(strid);
 
-        Toast.makeText(this, "Hike has been Deleted with id:" + hikeId, Toast.LENGTH_LONG).show();
-
-        Intent intent = new Intent(this, HikeEditActivity.class);
+        Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
 
     }
@@ -324,6 +341,8 @@ public class HikeEditActivity extends AppCompatActivity {
                 (RadioButton) findViewById(HikeParking.getCheckedRadioButtonId());
         EditText HikeLenght = (EditText) findViewById(R.id.editTextNumberLenghtOfHike3);
         Spinner Difficulty = (Spinner) findViewById(R.id.spinner3);
+        EditText Weather = (EditText) findViewById(R.id.editTextTextPersonWeather2);
+        EditText HeartRate = (EditText) findViewById(R.id.editTextNumberHeartRate2);
         EditText HikeDesc = (EditText) findViewById(R.id.editTextTextPersonNameDescription3);
 
 
@@ -334,11 +353,14 @@ public class HikeEditActivity extends AppCompatActivity {
                 strLenght = HikeLenght.getText().toString(),
                 strLocation = Hikelocation.getText().toString(),
                 strDate = HikeDate.getText().toString(),
+                strWeather = Weather.getText().toString(),
+                strHeartRate = HeartRate.getText().toString(),
                 strDesc = HikeDesc.getText().toString();
 
         long hikeId = dbHelper.AmendDetails(strid,strName, strLocation,
                 strDate,  strParking,
                 strLenght,  strDifficulty,
+                strWeather, strHeartRate,
                 strDesc);
 
         Toast.makeText(this, "Hike has been amended with id:" + hikeId, Toast.LENGTH_LONG).show();

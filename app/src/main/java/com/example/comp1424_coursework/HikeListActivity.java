@@ -61,6 +61,8 @@ public class HikeListActivity extends AppCompatActivity {
                 String parking = hikes.get_hikeparking();
                 String lenght = hikes.get_hikelenght();
                 String difficulty = hikes.get_hikedifficulty();
+                String weather = hikes.get_hikeweather();
+                String heartrate = hikes.get_hikeheartrate();
                 String description = hikes.get_hikedesc();
                 Intent intent = new Intent(HikeListActivity.this, HikeEditActivity.class);
                 intent.putExtra("id2", id2);
@@ -71,6 +73,8 @@ public class HikeListActivity extends AppCompatActivity {
                 intent.putExtra("parking", parking);
                 intent.putExtra("lenght", lenght);
                 intent.putExtra("difficulty", difficulty);
+                intent.putExtra("weather", weather);
+                intent.putExtra("heartrate", heartrate);
                 intent.putExtra("description", description);
                 startActivity(intent);
                 finish();
