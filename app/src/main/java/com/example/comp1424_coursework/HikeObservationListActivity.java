@@ -1,62 +1,72 @@
 package com.example.comp1424_coursework;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.content.Intent;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import java.util.ArrayList;
 
-public class DetailsActivity extends AppCompatActivity {
+public class HikeObservationListActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-
-        DatabaseHelper db = new DatabaseHelper(this);
-
-        String hike = db.getDetails();
-
-        TextView detailsTxt = findViewById(R.id.detailsText);
-
-        detailsTxt.setText(hike);
-        Button back = (Button)findViewById(R.id.buttonBack);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setContentView(R.layout.activity_hike_observation_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar8);
         setSupportActionBar(toolbar);
-        back.setOnClickListener(new View.OnClickListener() {
+        DatabaseHelper dbHandler = new DatabaseHelper(this);
+        //add a product
+        //retrieve products from db
+        int id = getIntent().getExtras().getInt("id2");
+        String hike_id = Integer.valueOf(id).toString();
+        ArrayList<Observations> Observlist = dbHandler.getObservationsbyID(hike_id);
+        // Create the adapter
+        ObservationsAdapter adapter = new ObservationsAdapter(this, Observlist);
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) findViewById(R.id.list_view2);
+        //set adapter
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-              backmethod();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
-
     }
+
 
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+
     private void MainMenu() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void backmethod() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -66,6 +76,7 @@ public class DetailsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

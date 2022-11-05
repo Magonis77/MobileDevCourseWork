@@ -17,8 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "HIKE_APP.DB";
     static final int DATABASE_VERSION = 1;
     Context context;
-    static final String DATABASE_TABLE = "HIKES";
-    static final String HIKE_ID = "_ID";
+    static final String HIKES_TABLE = "HIKES";
+    static final String HIKE_ID = "hike_id";
     static final String HIKE_NAME = "hike_name";
     static final String HIKE_LOCATION = "hike_location";
     static final String HIKE_DATE = "hike_date";
@@ -28,6 +28,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String HIKE_WEATHER = "hike_weather";
     static final String HIKE_HEARTRATE = "hike_degree";
     static final String HIKE_DESC = "hike_desc";
+
+
+
+    static final String OBSERVATION_TABLE = "Observations";
+    static final String OBSERVATION_ID = "obs_ID";
+    static final String OBSERVATION_HIKE_ID = "hike_id_fk";
+    static final String OBSERVATION_NAME = "observation_name";
+    static final String OBSERVATION_TIME = "observation_time";
+    static final String OBSERVATION_COMMENTS = "observation_comments";
 
     private SQLiteDatabase database;
 
@@ -43,10 +52,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT, " +
                     " %s TEXT, " +
                     " %s TEXT)",
-            DATABASE_TABLE, HIKE_ID, HIKE_NAME, HIKE_LOCATION,HIKE_DATE,
+            HIKES_TABLE, HIKE_ID, HIKE_NAME, HIKE_LOCATION,HIKE_DATE,
             HIKE_PARKING,HIKE_LENGTH,HIKE_DIFFICULTY,HIKE_WEATHER,HIKE_HEARTRATE,HIKE_DESC
     );
 
+    private static final String DATABASE_CREATE_OBSERVATIONS = String.format(
+            "CREATE TABLE %s (" +
+                    " %s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    " %s TEXT, " +
+                    " %s TEXT, " +
+                    " %s TEXT, " +
+                    " FOREIGN KEY(%s) REFERENCES HIKES(_ID))",
+            OBSERVATION_TABLE, OBSERVATION_ID, OBSERVATION_NAME, OBSERVATION_TIME,OBSERVATION_COMMENTS, HIKE_ID
+    );
+    String createOrderTable = "create table " + OBSERVATION_TABLE +
+            "(ObservationID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "observation_name TEXT,"+
+            "observation_time TEXT,"+
+            "observation_comments TEXT," +
+            "hike_id_fk TEXT," +
+            "FOREIGN KEY(hike_id_fk) REFERENCES HIKES(hike_id));";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,13 +83,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(DATABASE_CREATE);
+        db.execSQL(createOrderTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
-
-        Log.w(this.getClass().getName(), DATABASE_TABLE +
+        db.execSQL("DROP TABLE IF EXISTS " + HIKES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + OBSERVATION_TABLE);
+        Log.w(this.getClass().getName(), HIKES_TABLE + OBSERVATION_TABLE +
                 " database upgrade to version " + newVersion + " - old data lost");
         onCreate(db);
     }
@@ -83,13 +109,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(HIKE_HEARTRATE, hike_heartrate);
         rowValues.put(HIKE_DESC, hike_desc);
 
-        return  database.insertOrThrow(DATABASE_TABLE, null, rowValues);
+        return  database.insertOrThrow(HIKES_TABLE, null, rowValues);
+    }
+
+    public long InsertObservations(String Obs_name, String obs_time, String obs_comment, String strhikeid){
+        ContentValues rowValues = new ContentValues();
+
+        rowValues.put(OBSERVATION_NAME, Obs_name);
+        rowValues.put(OBSERVATION_TIME, obs_time);
+        rowValues.put(OBSERVATION_COMMENTS, obs_comment);
+        rowValues.put(OBSERVATION_HIKE_ID, Integer.valueOf(strhikeid));
+
+
+        return  database.insertOrThrow(OBSERVATION_TABLE, null, rowValues);
     }
 
     public String getDetails() {
-        Cursor results = database.query("HIKES", new String[] {"_ID","hike_name","hike_location",
+        Cursor results = database.query("Observations", new String[] {"hike_id","hike_name","hike_location",
                         "hike_date","hike_parking","hike_length","hike_difficulty","hike_weather","hike_heartrate","hike_desc"},
-                null,null,null,null,"_ID");
+                null,null,null,null,"hike_id");
         String resultText = "";
 
         results.moveToFirst();
@@ -115,12 +153,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return resultText;
     }
 
+    public String getOBSDetails() {
+        Cursor results = database.query("Observations", new String[] {"obs_ID","observation_name","observation_time",
+                        "observation_comments"},
+                null,null,null,null,"obs_ID");
+        String resultText = "";
+
+        results.moveToFirst();
+        while(!results.isAfterLast()) {
+            int id = results.getInt(0);
+            String OBS_name = results.getString(1);
+            String OBS_time = results.getString(2);
+            String OBS_comments = results.getString(3);
+
+            resultText += id + " " + OBS_name + " " + OBS_time + " "
+                    + OBS_comments + "\n";
+
+            results.moveToNext();
+        }
+        return resultText;
+    }
+
+    public ArrayList<Observations> getObservations(){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + OBSERVATION_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<Observations> Observations = new ArrayList<Observations>();
+        while(cursor.moveToNext()){
+            Observations obs = new Observations();
+            obs.set_id(cursor.getInt(0));
+            obs.set_obsname(cursor.getString(1));
+            obs.set_obstime(cursor.getString(2));
+            obs.set_obscomment(cursor.getString(3));
+            Observations.add(obs);
+        }
+        cursor.close();
+        db.close();
+        return Observations;
+    }
+
     public ArrayList<Hikes> getHikes(){
 
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + DATABASE_TABLE;
+        String query = "SELECT * FROM " + HIKES_TABLE;
         Cursor cursor = db.rawQuery(query, null);
-        ArrayList<Hikes> hike = new ArrayList<Hikes>();
+        ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
         while(cursor.moveToNext()){
             Hikes hikes = new Hikes();
             hikes.set_id(cursor.getInt(0));
@@ -133,11 +211,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             hikes.set_hikeweather(cursor.getString(7));
             hikes.set_hikeheartrate(cursor.getString(8));
             hikes.set_hikedesc(cursor.getString(9));
-            hike.add(hikes);
+            hikelist.add(hikes);
         }
         cursor.close();
         db.close();
-        return hike;
+        return hikelist;
     }
 
     public long AmendDetails(String strid, String strName, String strLocation, String strDate, String strParking, String strLenght, String strDifficulty,String strWeather, String strHeartRate, String strDesc) {
@@ -155,18 +233,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         int id = Integer.parseInt(strid);
 
-        return  database.update(DATABASE_TABLE, rowValues, "_id = " + id, null);
+        return  database.update(HIKES_TABLE, rowValues, "hike_id = " + id, null);
     }
 
     public long DeleteEntry(String strid) {
         int id = Integer.parseInt(strid);
 
-        return  database.delete(DATABASE_TABLE, "_id = " + id, null);
+        return  database.delete(HIKES_TABLE, "hike_id = " + id, null);
     }
 
     public void deleteALL() {
 
-        database.delete(DATABASE_TABLE, null, null);
+        database.delete(HIKES_TABLE, null, null);
+    }
+
+    public ArrayList<Observations> getObservationsbyID(String GetID) {
+        Cursor results = database.rawQuery("Select * from Observations where hike_id_fk=" + GetID + "", null);
+        ArrayList<Observations> observationslist = new ArrayList<Observations>();
+        while(results.moveToNext()){
+            Observations observations = new Observations();
+            observations.set_id(results.getInt(0));
+            observations.set_obsname(results.getString(1));
+            observations.set_obstime(results.getString(2));
+            observations.set_obscomment(results.getString(3));
+
+            observationslist.add(observations);
+        }
+        results.close();
+        database.close();
+        return observationslist;
     }
 }
 

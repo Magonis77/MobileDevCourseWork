@@ -54,10 +54,6 @@ public class HikeInputActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
-    private void HikeObservations() {
-        Intent intent = new Intent(this, HikeObservationAddActivity.class);
-        startActivity(intent);
-    }
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
@@ -80,9 +76,6 @@ public class HikeInputActivity extends AppCompatActivity {
                 return true;
             case R.id.itemHikeList:
                 HikeList();
-                return true;
-            case R.id.itemObservationsAdd:
-                HikeObservations();
                 return true;
             case R.id.itemSearch:
                 HikeSearch();

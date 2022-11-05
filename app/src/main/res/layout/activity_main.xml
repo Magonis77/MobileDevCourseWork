@@ -18,7 +18,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="71dp"
+        android:layout_marginBottom="117dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -32,7 +32,7 @@
         android:id="@+id/buttonHikeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="45dp"
         android:text="Create Hike"
         app:layout_constraintBottom_toTopOf="@+id/buttonhikelist"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,33 +43,22 @@
         android:id="@+id/buttonhikelist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="51dp"
         android:text="Hike list"
-        app:layout_constraintBottom_toTopOf="@+id/buttonaddobservation"
-        app:layout_constraintEnd_toEndOf="@+id/buttonaddobservation"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHikeInput" />
-
-    <Button
-        android:id="@+id/buttonaddobservation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:text="Add observations"
         app:layout_constraintBottom_toTopOf="@+id/buttonsearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonhikelist" />
+        app:layout_constraintStart_toStartOf="@+id/buttonHikeInput"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHikeInput" />
 
     <Button
         android:id="@+id/buttonsearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
         android:layout_marginBottom="318dp"
         android:text="Search hikes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/buttonaddobservation"
-        app:layout_constraintTop_toBottomOf="@+id/buttonaddobservation" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonhikelist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

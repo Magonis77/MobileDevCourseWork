@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button buttonHikeInput = (Button)findViewById(R.id.buttonHikeInput);
         Button buttonHikeList = (Button)findViewById(R.id.buttonhikelist);
-        Button buttonObservationsAdd = (Button)findViewById(R.id.buttonaddobservation);
         Button buttonHikeSearch = (Button)findViewById(R.id.buttonsearch);
         buttonHikeInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,12 +33,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 HikeList();
-            }
-        });
-        buttonObservationsAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HikeObservations();
             }
         });
         buttonHikeSearch.setOnClickListener(new View.OnClickListener() {
@@ -58,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
-        startActivity(intent);
-    }
-    private void HikeObservations() {
-        Intent intent = new Intent(this, HikeObservationAddActivity.class);
         startActivity(intent);
     }
     private void HikeSearch() {
@@ -86,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.itemHikeList:
                 HikeList();
-                return true;
-            case R.id.itemObservationsAdd:
-                HikeObservations();
                 return true;
             case R.id.itemSearch:
                 HikeSearch();

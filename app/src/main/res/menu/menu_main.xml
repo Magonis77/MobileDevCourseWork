@@ -11,10 +11,6 @@
         android:title="Hike List"
         app:showAsAction="never|withText"/>
     <item
-        android:id="@+id/itemObservationsAdd"
-        android:title="Add Observations"
-        app:showAsAction="never|withText"/>
-    <item
         android:id="@+id/itemSearch"
         android:title="Search"
         app:showAsAction="never|withText" />

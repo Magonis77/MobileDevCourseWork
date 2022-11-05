@@ -7,37 +7,28 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class HikeListActivity extends AppCompatActivity {
-
+    int id2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hike_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar6);
 
-        Button save = (Button)findViewById(R.id.buttondeleteall);
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Deletedatabasealert();
-            }
-        });
-
+        Button deleteall = (Button) findViewById(R.id.buttondeleteall);
         setSupportActionBar(toolbar);
         //get db
         DatabaseHelper dbHandler = new DatabaseHelper(this);
@@ -47,14 +38,21 @@ public class HikeListActivity extends AppCompatActivity {
         // Create the adapter
         HikesAdapter adapter = new HikesAdapter(this, hikeslist);
         // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.list_view);
+        ListView listView = (ListView) findViewById(R.id.list_view5);
         //set adapter
         listView.setAdapter(adapter);
+        deleteall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Deletedatabasealert();
+            }
+        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Hikes hikes = adapter.getItem(position);
-                int id2 = hikes.get_id();
+                id2 = hikes.get_id();
                 String name = hikes.get_hikename();
                 String location = hikes.get_hikelocation();
                 String date = hikes.get_hikedate();
@@ -64,25 +62,83 @@ public class HikeListActivity extends AppCompatActivity {
                 String weather = hikes.get_hikeweather();
                 String heartrate = hikes.get_hikeheartrate();
                 String description = hikes.get_hikedesc();
-                Intent intent = new Intent(HikeListActivity.this, HikeEditActivity.class);
-                intent.putExtra("id2", id2);
-                intent.putExtra("id", id);
-                intent.putExtra("name", name);
-                intent.putExtra("location", location);
-                intent.putExtra("date", date);
-                intent.putExtra("parking", parking);
-                intent.putExtra("lenght", lenght);
-                intent.putExtra("difficulty", difficulty);
-                intent.putExtra("weather", weather);
-                intent.putExtra("heartrate", heartrate);
-                intent.putExtra("description", description);
-                startActivity(intent);
-                finish();
-                Toast.makeText(HikeListActivity.this, name, Toast.LENGTH_LONG).show();
+                PopupMenu popupMenu = new PopupMenu(HikeListActivity.this, view);
+                popupMenu.getMenuInflater().inflate(R.menu.optionsmenu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.Observations:
+                                Intent intentobservation = new Intent(HikeListActivity.this, HikeObservationListActivity.class);
+                                intentobservation.putExtra("id2", id2);
+                                startActivity(intentobservation);
+                                finish();
+                                Toast.makeText(HikeListActivity.this, name, Toast.LENGTH_LONG).show();
+                                return true;
+                            case R.id.ObservationsAdd:
+                                Intent intentobservationadd = new Intent(HikeListActivity.this, HikeObservationAddActivity.class);
+                                intentobservationadd.putExtra("id2", id2);
+                                startActivity(intentobservationadd);
+                                finish();
+                                Toast.makeText(HikeListActivity.this, name, Toast.LENGTH_LONG).show();
+                                return true;
+                            case R.id.Edit:
+                                Intent intentedithike = new Intent(HikeListActivity.this, HikeEditActivity.class);
+                                intentedithike.putExtra("id2", id2);
+                                intentedithike.putExtra("id", id);
+                                intentedithike.putExtra("name", name);
+                                intentedithike.putExtra("location", location);
+                                intentedithike.putExtra("date", date);
+                                intentedithike.putExtra("parking", parking);
+                                intentedithike.putExtra("lenght", lenght);
+                                intentedithike.putExtra("difficulty", difficulty);
+                                intentedithike.putExtra("weather", weather);
+                                intentedithike.putExtra("heartrate", heartrate);
+                                intentedithike.putExtra("description", description);
+                                startActivity(intentedithike);
+                                finish();
+                                Toast.makeText(HikeListActivity.this, name, Toast.LENGTH_LONG).show();
+                                return true;
+                            case R.id.Delete:
+                                displaydeletenotification();
+                                return true;
+                        }
+                        return true;
+
+                    }
+                });
+                popupMenu.show();
             }
         });
     }
 
+
+
+    private void displaydeletenotification() {
+        new AlertDialog.Builder(this).setTitle("Are you sure you want to delete this hike?").setMessage(
+                "If you delete the hike won't be recoverable!").setNegativeButton("Back",
+                new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DeleteEntry();
+            }
+        }).show();
+    }
+
+    private void DeleteEntry() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+
+        String strid = Integer.valueOf(id2).toString();
+
+        dbHelper.DeleteEntry(strid);
+
+        Intent intent = new Intent(this, HikeListActivity.class);
+        startActivity(intent);
+
+    }
     private void Deletedatabasealert() {
         new AlertDialog.Builder(this).setTitle("Are you sure you want to delete all?").setMessage(
                 "If you delete the hikes won't be recoverable!").setNegativeButton("Back",
@@ -118,10 +174,6 @@ public class HikeListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
-    private void HikeObservations() {
-        Intent intent = new Intent(this, HikeObservationAddActivity.class);
-        startActivity(intent);
-    }
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
@@ -144,9 +196,6 @@ public class HikeListActivity extends AppCompatActivity {
                 return true;
             case R.id.itemHikeList:
                 HikeList();
-                return true;
-            case R.id.itemObservationsAdd:
-                HikeObservations();
                 return true;
             case R.id.itemSearch:
                 HikeSearch();
