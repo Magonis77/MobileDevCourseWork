@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_name" />
@@ -39,7 +39,7 @@
         android:id="@+id/textView_Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/textView_lenght"
         app:layout_constraintTop_toBottomOf="@+id/textView_lenght" />
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/textViewweather"
         app:layout_constraintTop_toBottomOf="@+id/textViewweather" />

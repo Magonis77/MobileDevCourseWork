@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class HikeSearchActivity extends AppCompatActivity {
@@ -18,6 +21,26 @@ public class HikeSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hike_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
+        Button search = (Button)findViewById(R.id.buttonSearch);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getInputs();
+            }
+        });
+
+    }
+
+    private void getInputs() {
+        EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonSearch);
+
+        String strname = HikeName.getText().toString();
+        System.out.println("Im in search activity " + strname);
+        Intent intent = new Intent(this, HikeSearchListActivity.class);
+        intent.putExtra("name", strname);
+        startActivity(intent);
+
     }
 
     private void Hikeinput() {

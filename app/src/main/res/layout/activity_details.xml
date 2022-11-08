@@ -6,40 +6,124 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
+    <TextView
+        android:id="@+id/textView_lenght2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Date2"
+        app:layout_constraintStart_toStartOf="@+id/textView_location2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_location2" />
+
+    <TextView
+        android:id="@+id/textViewweather2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewheartrate2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_diff2" />
+
+    <TextView
+        android:id="@+id/textViewheartrate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_desc2"
+        app:layout_constraintStart_toStartOf="@+id/textViewweather2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewweather2" />
+
+    <TextView
+        android:id="@+id/textView_location2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="7dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_lenght2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_name2" />
+
+    <TextView
+        android:id="@+id/textview_id2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="3dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textview_name2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+    <TextView
+        android:id="@+id/textView_parking2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_diff2"
+        app:layout_constraintStart_toStartOf="@+id/textView_Date2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Date2" />
+
+    <TextView
+        android:id="@+id/textView_desc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="398dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewheartrate2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewheartrate2" />
+
+    <TextView
+        android:id="@+id/textview_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="10dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_location2"
+        app:layout_constraintStart_toStartOf="@+id/textview_id2"
+        app:layout_constraintTop_toBottomOf="@+id/textview_id2" />
+
+    <TextView
+        android:id="@+id/textView_diff2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="7dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewweather2"
+        app:layout_constraintStart_toStartOf="@+id/textViewweather2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_parking2" />
+
+    <TextView
+        android:id="@+id/textView_Date2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_parking2"
+        app:layout_constraintStart_toStartOf="@+id/textView_lenght2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_lenght2" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="245dp"
-        android:layout_marginBottom="565dp"
+        android:layout_marginBottom="21dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBack"
+        app:layout_constraintBottom_toTopOf="@+id/textview_id2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Hike Details" />
 
-    <TextView
-        android:id="@+id/detailsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="296dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
