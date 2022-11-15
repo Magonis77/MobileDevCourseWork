@@ -264,7 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Hikes> SearchDB(String strname) {
-        Cursor cursor = database.rawQuery("SELECT * FROM HIKES WHERE hike_name LIKE " + strname + "",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_name like '%"+strname+"%'" , null);
         ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
         while(cursor.moveToNext()){
             Hikes hikes = new Hikes();
