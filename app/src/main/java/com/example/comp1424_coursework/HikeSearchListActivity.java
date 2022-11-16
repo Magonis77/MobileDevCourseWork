@@ -32,7 +32,7 @@ public class HikeSearchListActivity extends AppCompatActivity {
         System.out.println("im in searchlist" + name);
         ArrayList<Hikes> hikeslist = dbHandler.SearchDB(name);
         // Create the adapter
-        HikesAdapter adapter = new HikesAdapter(this, hikeslist);
+        SearchAdapter adapter = new SearchAdapter(this, hikeslist);
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.listview6);
         //set adapter
