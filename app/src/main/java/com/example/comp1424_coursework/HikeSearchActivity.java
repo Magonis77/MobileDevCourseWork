@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class HikeSearchActivity extends AppCompatActivity {
@@ -38,6 +40,10 @@ public class HikeSearchActivity extends AppCompatActivity {
         String strname = HikeName.getText().toString();
         System.out.println("Im in search activity " + strname);
         Intent intent = new Intent(this, HikeSearchListActivity.class);
+        RadioGroup Filters = (RadioGroup) findViewById(R.id.radioGroup4);
+        RadioButton radioButtonInput =
+                (RadioButton) findViewById(Filters.getCheckedRadioButtonId());
+        intent.putExtra("filter", radioButtonInput.getText().toString());
         intent.putExtra("name", strname);
         startActivity(intent);
 

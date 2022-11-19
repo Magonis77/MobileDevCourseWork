@@ -263,8 +263,71 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return observationslist;
     }
 
-    public ArrayList<Hikes> SearchDB(String strname) {
+    public ArrayList<Hikes> SearchDBName(String strname) {
         Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_name like '%"+strname+"%'" , null);
+        ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
+        while(cursor.moveToNext()){
+            Hikes hikes = new Hikes();
+            hikes.set_id(cursor.getInt(0));
+            hikes.set_hikename(cursor.getString(1));
+            hikes.set_hikelocation(cursor.getString(2));
+            hikes.set_hikedate(cursor.getString(3));
+            hikes.set_hikeparking(cursor.getString(4));
+            hikes.set_hikelenght(cursor.getString(5));
+            hikes.set_hikedifficulty(cursor.getString(6));
+            hikes.set_hikeweather(cursor.getString(7));
+            hikes.set_hikeheartrate(cursor.getString(8));
+            hikes.set_hikedesc(cursor.getString(9));
+            hikelist.add(hikes);
+        }
+        cursor.close();
+        database.close();
+        return hikelist;
+    }
+    public ArrayList<Hikes> SearchDBLoc(String strname) {
+        Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_location like '%"+strname+"%'" , null);
+        ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
+        while(cursor.moveToNext()){
+            Hikes hikes = new Hikes();
+            hikes.set_id(cursor.getInt(0));
+            hikes.set_hikename(cursor.getString(1));
+            hikes.set_hikelocation(cursor.getString(2));
+            hikes.set_hikedate(cursor.getString(3));
+            hikes.set_hikeparking(cursor.getString(4));
+            hikes.set_hikelenght(cursor.getString(5));
+            hikes.set_hikedifficulty(cursor.getString(6));
+            hikes.set_hikeweather(cursor.getString(7));
+            hikes.set_hikeheartrate(cursor.getString(8));
+            hikes.set_hikedesc(cursor.getString(9));
+            hikelist.add(hikes);
+        }
+        cursor.close();
+        database.close();
+        return hikelist;
+    }
+    public ArrayList<Hikes> SearchDBLenght(String strname) {
+        Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_length like '%"+strname+"%'" , null);
+        ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
+        while(cursor.moveToNext()){
+            Hikes hikes = new Hikes();
+            hikes.set_id(cursor.getInt(0));
+            hikes.set_hikename(cursor.getString(1));
+            hikes.set_hikelocation(cursor.getString(2));
+            hikes.set_hikedate(cursor.getString(3));
+            hikes.set_hikeparking(cursor.getString(4));
+            hikes.set_hikelenght(cursor.getString(5));
+            hikes.set_hikedifficulty(cursor.getString(6));
+            hikes.set_hikeweather(cursor.getString(7));
+            hikes.set_hikeheartrate(cursor.getString(8));
+            hikes.set_hikedesc(cursor.getString(9));
+            hikelist.add(hikes);
+        }
+        cursor.close();
+        database.close();
+        return hikelist;
+    }
+    public ArrayList<Hikes> SearchDBDate(String strname) {
+        Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_date like '%"+strname+"%'" , null);
         ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
         while(cursor.moveToNext()){
             Hikes hikes = new Hikes();

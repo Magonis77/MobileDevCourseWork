@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RadioGroupSearch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HikeSearchActivity">
@@ -10,7 +11,7 @@
         android:id="@+id/toolbar3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="290dp"
+        android:layout_marginBottom="178dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -24,32 +25,79 @@
         android:id="@+id/buttonSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="215dp"
+        android:layout_marginBottom="70dp"
         android:text="Search"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonSearch"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonSearch"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonSearch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup4" />
 
     <EditText
         android:id="@+id/editTextTextPersonSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textViewSearch"
         app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="10dp"
+        android:text="Search by:"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup4"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonSearch"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonSearch" />
 
     <TextView
         android:id="@+id/textViewSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:layout_marginBottom="6dp"
-        android:text="Name:"
+        android:text="Keyword:"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonSearch"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonSearch"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup4"
+        android:layout_width="169dp"
+        android:layout_height="123dp"
+        android:layout_marginBottom="144dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+        <RadioButton
+            android:id="@+id/radioButtonname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name" />
+
+        <RadioButton
+            android:id="@+id/radioButtonlocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location" />
+
+        <RadioButton
+            android:id="@+id/radioButtonlenght"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lenght" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

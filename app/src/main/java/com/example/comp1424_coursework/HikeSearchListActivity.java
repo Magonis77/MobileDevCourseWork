@@ -29,8 +29,28 @@ public class HikeSearchListActivity extends AppCompatActivity {
         //add a product
         //retrieve products from db
         String name = getIntent().getExtras().getString("name");
+        String filter = getIntent().getExtras().getString("filter");
+        System.out.println(filter);
+        ArrayList<Hikes> hikeslist = null;
+        try {
+            switch (filter) {
+                case "Name":
+                    hikeslist = dbHandler.SearchDBName(name);
+                    break;
+                case "Location":
+                    hikeslist = dbHandler.SearchDBLoc(name);
+                    break;
+                case "Lenght":
+                    hikeslist = dbHandler.SearchDBLenght(name);
+                    break;
+                case "Date":
+                    hikeslist = dbHandler.SearchDBDate(name);
+                    break;
+            }
+        } catch (NullPointerException e) {
+
+        }
         System.out.println("im in searchlist" + name);
-        ArrayList<Hikes> hikeslist = dbHandler.SearchDB(name);
         // Create the adapter
         SearchAdapter adapter = new SearchAdapter(this, hikeslist);
         // Attach the adapter to a ListView
