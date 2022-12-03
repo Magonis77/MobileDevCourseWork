@@ -1,9 +1,14 @@
 package com.example.comp1424_coursework;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -30,16 +35,16 @@ import javax.net.ssl.X509TrustManager;
 
 public class activity_json extends AppCompatActivity {
     private WebView browser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         browser = (WebView) findViewById(R.id.webkit);
         try {
             URL pageURL = new URL(getString(R.string.url));
             trustAllHosts();
-            HttpURLConnection con = (HttpURLConnection)pageURL.openConnection();
+            HttpURLConnection con = (HttpURLConnection) pageURL.openConnection();
 
             String jsonString = getString(R.string.json);
 
@@ -47,7 +52,63 @@ public class activity_json extends AppCompatActivity {
             Thread t1 = new Thread(myTask, "JSON Thread");
             t1.start();
 
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    private void Hikeinput() {
+        Intent intent = new Intent(this, HikeInputActivity.class);
+        startActivity(intent);
+    }
+    private void HikeList() {
+        Intent intent = new Intent(this, HikeListActivity.class);
+        startActivity(intent);
+    }
+    private void HikeSearch() {
+        Intent intent = new Intent(this, HikeSearchActivity.class);
+        startActivity(intent);
+    }
+    private void MainMenu() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    private void JSON() {
+        Intent intent = new Intent(this, activity_json.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemCreateHike:
+                Hikeinput();
+                return true;
+            case R.id.itemHikeList:
+                HikeList();
+                return true;
+            case R.id.itemSearch:
+                HikeSearch();
+                return true;
+            case R.id.itemMenu:
+                MainMenu();
+                return true;
+            case R.id.itemExit:
+                Toast.makeText(getApplicationContext(),
+                        "You asked to exit, but why not start another app?",
+                        Toast.LENGTH_LONG).show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -56,9 +117,9 @@ public class activity_json extends AppCompatActivity {
      */
     private void trustAllHosts() {
         // Create a trust manager that does not validate certificate chains
-        TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
             public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return new java.security.cert.X509Certificate[] {};
+                return new java.security.cert.X509Certificate[]{};
             }
 
             public void checkClientTrusted(X509Certificate[] chain,
@@ -68,7 +129,7 @@ public class activity_json extends AppCompatActivity {
             public void checkServerTrusted(X509Certificate[] chain,
                                            String authType) throws CertificateException {
             }
-        } };
+        }};
 
         // Install the all-trusting trust manager
         try {
@@ -81,22 +142,19 @@ public class activity_json extends AppCompatActivity {
         }
     }
 
-    class JsonThread implements Runnable
-    {
+    class JsonThread implements Runnable {
         private AppCompatActivity activity;
         private HttpURLConnection con;
         private String jsonPayLoad;
 
-        public JsonThread(AppCompatActivity activity, HttpURLConnection con, String jsonPayload)
-        {
+        public JsonThread(AppCompatActivity activity, HttpURLConnection con, String jsonPayload) {
             this.activity = activity;
             this.con = con;
             this.jsonPayLoad = jsonPayload;
         }
 
         @Override
-        public void run()
-        {
+        public void run() {
             String response = "";
             if (prepareConnection()) {
                 response = postJson();
@@ -108,13 +166,11 @@ public class activity_json extends AppCompatActivity {
 
 
         private void showResult(String response) {
-            activity.runOnUiThread(new Runnable()
-            {
+            activity.runOnUiThread(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     String page = generatePage(response);
-                    ((activity_json)activity).browser.loadData(page, "text/html", "UTF-8");
+                    ((activity_json) activity).browser.loadData(page, "text/html", "UTF-8");
                 }
             });
         }
@@ -141,7 +197,7 @@ public class activity_json extends AppCompatActivity {
 
         private String readStream(InputStream in) {
             StringBuilder sb = new StringBuilder();
-            try(BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
                 String nextLine = "";
                 while ((nextLine = reader.readLine()) != null) {
                     sb.append(nextLine);
@@ -170,4 +226,5 @@ public class activity_json extends AppCompatActivity {
             return false;
         }
     }
+
 }

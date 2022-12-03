@@ -102,6 +102,13 @@ public class HikeListActivity extends AppCompatActivity {
                             case R.id.Delete:
                                 displaydeletenotification();
                                 return true;
+                            case R.id.ShowonMap:
+                                Intent intentmap = new Intent(HikeListActivity.this, activity_map.class);
+                                intentmap.putExtra("location", location);
+                                startActivity(intentmap);
+                                finish();
+                                Toast.makeText(HikeListActivity.this, name, Toast.LENGTH_LONG).show();
+                                return true;
                         }
                         return true;
 
