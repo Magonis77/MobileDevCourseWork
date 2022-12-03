@@ -114,7 +114,7 @@ public class activity_json extends AppCompatActivity {
                 public void run()
                 {
                     String page = generatePage(response);
-                    ((MainActivity)activity).browser.loadData(page, "text/html", "UTF-8");
+                    ((activity_json)activity).browser.loadData(page, "text/html", "UTF-8");
                 }
             });
         }

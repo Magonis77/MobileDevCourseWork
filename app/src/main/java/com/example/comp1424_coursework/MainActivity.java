@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonHikeInput = (Button)findViewById(R.id.buttonHikeInput);
         Button buttonHikeList = (Button)findViewById(R.id.buttonhikelist);
         Button buttonHikeSearch = (Button)findViewById(R.id.buttonsearch);
+        Button buttonJSON = (Button)findViewById(R.id.btnjson);
         buttonHikeInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 HikeSearch();
             }
         });
+        buttonJSON.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSON();
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -59,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    private void JSON() {
+        Intent intent = new Intent(this, activity_json.class);
         startActivity(intent);
     }
 
