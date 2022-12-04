@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonHikeList = (Button)findViewById(R.id.buttonhikelist);
         Button buttonHikeSearch = (Button)findViewById(R.id.buttonsearch);
         Button buttonJSON = (Button)findViewById(R.id.btnjson);
+        Button btnloc = (Button)findViewById(R.id.btnlocation);
         buttonHikeInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 JSON();
             }
         });
+        btnloc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Hikeloc();
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
+        startActivity(intent);
+    }
+    private void Hikeloc() {
+        Intent intent = new Intent(this, locationtest.class);
         startActivity(intent);
     }
     private void HikeList() {

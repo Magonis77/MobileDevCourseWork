@@ -18,11 +18,11 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="412dp"
+        android:layout_marginBottom="81dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/btnjson"
+        app:layout_constraintBottom_toTopOf="@+id/buttonHikeInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,31 +32,31 @@
         android:id="@+id/buttonHikeInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="23dp"
         android:text="Create Hike"
         app:layout_constraintBottom_toTopOf="@+id/buttonhikelist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonsearch"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/buttonhikelist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="13dp"
         android:text="Hike list"
         app:layout_constraintBottom_toTopOf="@+id/buttonsearch"
-        app:layout_constraintStart_toStartOf="@+id/buttonHikeInput"
+        app:layout_constraintStart_toStartOf="@+id/buttonsearch"
         app:layout_constraintTop_toBottomOf="@+id/buttonHikeInput" />
 
     <Button
         android:id="@+id/buttonsearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="318dp"
+        android:layout_marginBottom="11dp"
         android:text="Search hikes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnjson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonhikelist" />
@@ -65,11 +65,22 @@
         android:id="@+id/btnjson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginBottom="215dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="29dp"
         android:text="JSON"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnlocation"
         app:layout_constraintStart_toStartOf="@+id/buttonsearch"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonsearch" />
+
+    <Button
+        android:id="@+id/btnlocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="281dp"
+        android:text="Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnjson"
+        app:layout_constraintTop_toBottomOf="@+id/btnjson" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
