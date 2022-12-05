@@ -126,11 +126,6 @@ public class locationtest extends AppCompatActivity {
     // method to check for permissions
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        // If we want background location
-        // on Android 10.0 and higher,
-        // use:
-        // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
     // method to request for permissions
@@ -167,28 +162,24 @@ public class locationtest extends AppCompatActivity {
             getLastLocation();
         }
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
-    private void Hikeloc() {
-        Intent intent = new Intent(this, locationtest.class);
-        startActivity(intent);
-    }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void JSON() {
-        Intent intent = new Intent(this, activity_json.class);
         startActivity(intent);
     }
 
@@ -197,7 +188,7 @@ public class locationtest extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
+    @Override //listens for drop down menu clicks on the toolbar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:

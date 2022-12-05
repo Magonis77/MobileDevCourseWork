@@ -13,12 +13,12 @@ import android.widget.Toast;
 
 public class activity_map extends AppCompatActivity {
     private WebView webView;
-    @Override
+    @Override //on screen opening executes the following code
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         String location = getIntent().getExtras().getString("location");
-
+        //creates a webview that loads the google maps with the selected hike location
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://www.google.com/maps/search/?api=1&query=" +location);
@@ -26,25 +26,24 @@ public class activity_map extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar11);
         setSupportActionBar(toolbar);
     }
-
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void JSON() {
-        Intent intent = new Intent(this, activity_json.class);
         startActivity(intent);
     }
 
@@ -53,7 +52,7 @@ public class activity_map extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
+    @Override//Listener that listens when an item in drop down menu of toolabar is selected
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:

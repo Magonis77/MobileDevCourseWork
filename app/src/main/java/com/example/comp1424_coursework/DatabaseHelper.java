@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    //define all Database strings.
     static final String DATABASE_NAME = "HIKE_APP.DB";
     static final int DATABASE_VERSION = 1;
     Context context;
@@ -39,6 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase database;
 
+    //creates the database table
     private static final String DATABASE_CREATE = String.format(
             "CREATE TABLE %s (" +
                     " %s INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -55,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             HIKE_PARKING,HIKE_LENGTH,HIKE_DIFFICULTY,HIKE_WEATHER,HIKE_HEARTRATE,HIKE_DESC
     );
 
+    //creates observation database table
     private static final String DATABASE_CREATE_OBSERVATIONS = String.format(
             "CREATE TABLE %s (" +
                     " %s INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -64,6 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " FOREIGN KEY(%s) REFERENCES HIKES(_ID))",
             OBSERVATION_TABLE, OBSERVATION_ID, OBSERVATION_NAME, OBSERVATION_TIME,OBSERVATION_COMMENTS, HIKE_ID
     );
+    //Creates Observation order table
     String createOrderTable = "create table " + OBSERVATION_TABLE +
             "(ObservationID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "observation_name TEXT,"+
@@ -72,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "hike_id_fk TEXT," +
             "FOREIGN KEY(hike_id_fk) REFERENCES HIKES(hike_id));";
 
+    //defines database Helper
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         database = getWritableDatabase();
@@ -85,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createOrderTable);
     }
 
-    @Override
+    @Override //Upgrades the database
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + HIKES_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + OBSERVATION_TABLE);
@@ -93,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " database upgrade to version " + newVersion + " - old data lost");
         onCreate(db);
     }
-
+    //inserts the Hike into database
     public long InsertDetails(String hike_name, String hike_location, String hike_date, String hike_parking,
                               String hike_length, String hike_difficulty,String hike_weather, String hike_heartrate, String hike_desc){
         ContentValues rowValues = new ContentValues();
@@ -110,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return  database.insertOrThrow(HIKES_TABLE, null, rowValues);
     }
-
+    //inserts observations into the database.
     public long InsertObservations(String Obs_name, String obs_time, String obs_comment, String strhikeid){
         ContentValues rowValues = new ContentValues();
 
@@ -122,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return  database.insertOrThrow(OBSERVATION_TABLE, null, rowValues);
     }
-
+    //gets the hike details
     public String getDetails() {
         Cursor results = database.query("Observations", new String[] {"hike_id","hike_name","hike_location",
                         "hike_date","hike_parking","hike_length","hike_difficulty","hike_weather","hike_heartrate","hike_desc"},
@@ -151,7 +156,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return resultText;
     }
-
+    //gets observation details from database
     public String getOBSDetails() {
         Cursor results = database.query("Observations", new String[] {"obs_ID","observation_name","observation_time",
                         "observation_comments"},
@@ -172,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return resultText;
     }
-
+    //gets observations
     public ArrayList<Observations> getObservations(){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -191,7 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return Observations;
     }
-
+    //gets all hikes from db
     public ArrayList<Hikes> getHikes(){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -216,7 +221,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return hikelist;
     }
-
+    //amends the details in hike
     public long AmendDetails(String strid, String strName, String strLocation, String strDate, String strParking, String strLenght, String strDifficulty,String strWeather, String strHeartRate, String strDesc) {
         ContentValues rowValues = new ContentValues();
 
@@ -234,18 +239,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return  database.update(HIKES_TABLE, rowValues, "hike_id = " + id, null);
     }
-
+    //deletes a hike from DB
     public long DeleteEntry(String strid) {
         int id = Integer.parseInt(strid);
 
         return  database.delete(HIKES_TABLE, "hike_id = " + id, null);
     }
 
+    //deletes all of the database hikes
     public void deleteALL() {
 
         database.delete(HIKES_TABLE, null, null);
     }
 
+    //Gets all observations by specific hike
     public ArrayList<Observations> getObservationsbyID(String GetID) {
         Cursor results = database.rawQuery("Select * from Observations where hike_id_fk=" + GetID + "", null);
         ArrayList<Observations> observationslist = new ArrayList<Observations>();
@@ -263,6 +270,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return observationslist;
     }
 
+    //searches the db for name of hike
     public ArrayList<Hikes> SearchDBName(String strname) {
         Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_name like '%"+strname+"%'" , null);
         ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
@@ -284,6 +292,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.close();
         return hikelist;
     }
+    //Searches Hikes by location
     public ArrayList<Hikes> SearchDBLoc(String strname) {
         Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_location like '%"+strname+"%'" , null);
         ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
@@ -305,6 +314,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.close();
         return hikelist;
     }
+    //Searches hikes by lenght
     public ArrayList<Hikes> SearchDBLenght(String strname) {
         Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_length like '%"+strname+"%'" , null);
         ArrayList<Hikes> hikelist = new ArrayList<Hikes>();
@@ -326,6 +336,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.close();
         return hikelist;
     }
+    //Searches DB hikes by date
     public ArrayList<Hikes> SearchDBDate(String strname) {
         Cursor cursor = database.rawQuery("SELECT * FROM HIKES where hike_date like '%"+strname+"%'" , null);
         ArrayList<Hikes> hikelist = new ArrayList<Hikes>();

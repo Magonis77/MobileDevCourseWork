@@ -1,6 +1,7 @@
 package com.example.comp1424_coursework;
 
 public class Observations {
+    //getter and setter for observations
     private int _id;
     private String _obsname;
     private String _obstime;

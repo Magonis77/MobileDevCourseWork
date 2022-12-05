@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class DetailsActivity extends AppCompatActivity {
+   //define textviews
     int id;
     TextView tvname;
     TextView tvlocation;
@@ -36,7 +37,7 @@ public class DetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
-
+        //get the data from previous intent sending
         id = getIntent().getExtras().getInt("id");
         int id2 = getIntent().getExtras().getInt("id2");
         String name = getIntent().getExtras().getString("name");
@@ -48,6 +49,7 @@ public class DetailsActivity extends AppCompatActivity {
         String weather = getIntent().getExtras().getString("weather");
         String heartrate = getIntent().getExtras().getString("heartrate");
         String description = getIntent().getExtras().getString("description");
+        //define all UI fields
         tvname = findViewById(R.id.textview_name2);
         tvlocation = findViewById(R.id.textView_location2);
         tvDate = findViewById(R.id.textView_Date2);
@@ -58,6 +60,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvHeartRate = findViewById(R.id.textViewheartrate2);
         tvdescription = findViewById(R.id.textView_desc2);
         tvid = findViewById(R.id.textview_id2);
+        //set the UI fields with the data.
         String idString = String.valueOf(id2);
         tvid.setText("ID: " + idString);
         tvname.setText("Name: " +name);
@@ -71,23 +74,27 @@ public class DetailsActivity extends AppCompatActivity {
         tvdescription.setText("Description: " + description);
 
     }
-
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+    //back button redirects the user back to main menu.
     private void backmethod() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -98,7 +105,7 @@ public class DetailsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
+    @Override //listener that listens for the drop down menu button clicks.
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:

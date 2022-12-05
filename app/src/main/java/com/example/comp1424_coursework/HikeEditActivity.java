@@ -27,6 +27,7 @@ import android.widget.Toast;
 import java.time.LocalDate;
 
 public class HikeEditActivity extends AppCompatActivity {
+    //Defines all textviews and radio buttons from the UI
     int id;
     TextView tvname;
     TextView tvlocation;
@@ -49,7 +50,7 @@ public class HikeEditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button edit = (Button) findViewById(R.id.buttonedit);
-
+        // button listener, on press gets calls getInput method.
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +59,7 @@ public class HikeEditActivity extends AppCompatActivity {
         });
 
         Button delete = (Button) findViewById(R.id.buttondelete);
-
+        // button listener on click calls Alertbox notification method
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +67,7 @@ public class HikeEditActivity extends AppCompatActivity {
             }
         });
 
-
+        //gets intent values that were passed from previous screen.
         id = getIntent().getExtras().getInt("id");
         int id2 = getIntent().getExtras().getInt("id2");
         String name = getIntent().getExtras().getString("name");
@@ -78,6 +79,7 @@ public class HikeEditActivity extends AppCompatActivity {
         String weather = getIntent().getExtras().getString("weather");
         String heartrate = getIntent().getExtras().getString("heartrate");
         String description = getIntent().getExtras().getString("description");
+        //Gets the UI fields and defines them
         tvname = findViewById(R.id.editTextTextPersonNameHike4);
         tvlocation = findViewById(R.id.editTextTextPersonNameLocation3);
         tvDate = findViewById(R.id.textViewDateSelector3);
@@ -89,12 +91,14 @@ public class HikeEditActivity extends AppCompatActivity {
         tvHeartRate = findViewById(R.id.editTextNumberHeartRate2);
         tvdescription = findViewById(R.id.editTextTextPersonNameDescription3);
         tvid = findViewById(R.id.textViewid);
+        //fills the ui fields with info that was gathered from intent
         tvid.setText(String.valueOf(id2));
         tvname.setText(name);
         tvlocation.setText(location);
         tvWeather.setText(weather);
         tvHeartRate.setText(heartrate);
         tvDate.setText(date);
+        //check the radio box depending on intent
         try {
             switch (parking) {
                 case "Yes":
@@ -108,6 +112,7 @@ public class HikeEditActivity extends AppCompatActivity {
 
         }
         tvLenght.setText(lenght);
+        //selets the drop down box information depending on intent received
         try {
             if (difficulty.equals("Easy")) {
                 tvDifficulty.setSelection(0);
@@ -121,7 +126,7 @@ public class HikeEditActivity extends AppCompatActivity {
         }
         tvdescription.setText(description);
     }
-
+    //date picker analog that pops up a calendar for easy date selection
     public static class DatePickerFragment extends DialogFragment implements
             DatePickerDialog.OnDateSetListener {
         @NonNull
@@ -143,28 +148,32 @@ public class HikeEditActivity extends AppCompatActivity {
         }
 
     }
-
+    //shows the calendar
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new HikeInputActivity.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
+    //updates the date
     public void updateDOB(LocalDate dob) {
         TextView dobText = (TextView)findViewById(R.id.textViewDateSelector3);
         dobText.setText(dob.toString());
     }
-
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -177,7 +186,7 @@ public class HikeEditActivity extends AppCompatActivity {
     }
 
 
-
+    //gets the inputs that were entered into the fields
     private void getInputs() {
         try {
             EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonNameHike4);
@@ -204,17 +213,20 @@ public class HikeEditActivity extends AppCompatActivity {
                     strWeather = Weather.getText().toString(),
                     strHeartRate = HeartRate.getText().toString(),
                     strDesc = HikeDesc.getText().toString();
+            //checks if the fields are entered
             if (strName.isEmpty() || strDifficulty.isEmpty()
                     || strParking.isEmpty() || strLenght.isEmpty()
                     || strLocation.isEmpty() || strDate.isEmpty() || strWeather.isEmpty() || strHeartRate.isEmpty()) {
                 displaymissinginfo();
             }
+            //checks if the info is entered with description and then shows the alert box to double check enetered information
             if (!strName.isEmpty() && !strDifficulty.isEmpty()
                     && !strParking.isEmpty() && !strLenght.isEmpty()
                     && !strLocation.isEmpty() && !strDate.isEmpty() && !strWeather.isEmpty() && !strHeartRate.isEmpty()
                     && !strDesc.isEmpty()) {
                 displayConfAlert(strName, strLocation, strDate, strParking, strLenght, strDifficulty,strWeather,strHeartRate, strDesc);
             }
+            //checks if the info is entered without description and shows the information in alert box for double checking
             if (!strName.isEmpty() && !strDifficulty.isEmpty()
                     && !strParking.isEmpty() && !strLenght.isEmpty()
                     && !strLocation.isEmpty() && !strDate.isEmpty() && !strWeather.isEmpty() && !strHeartRate.isEmpty() && strDesc.isEmpty()) {
@@ -227,7 +239,7 @@ public class HikeEditActivity extends AppCompatActivity {
             displayNothingAlert();
         }
     }
-
+    //alert box that asks the user to enter all required information
     private void displaymissinginfo() {
         new AlertDialog.Builder(this).setTitle("All required fields not filled!").setMessage(
                 "Please enter details in all required fields before submiting!").setNeutralButton("Back",
@@ -236,7 +248,7 @@ public class HikeEditActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) { }
                 }).show();
     }
-
+    //alert box that asks the user to enter information
     private void displayNothingAlert() {
         new AlertDialog.Builder(this).setTitle("No information entered!").setMessage(
                 "Please enter details before submiting!").setNeutralButton("Back",
@@ -245,7 +257,7 @@ public class HikeEditActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) { }
                 }).show();
     }
-
+    //alert box that displays the informatin without description to double check.
     private void displayConfAlertnoDesc(String strName, String strLocation,
                                         String strDate, String strParking,
                                         String strLenght,String strWeather,String strHeartRate, String strDifficulty) {
@@ -269,7 +281,7 @@ public class HikeEditActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //alert box that displays entered info for confirmation with description.
     private void displayConfAlert(String strName, String strLocation,
                                   String strDate, String strParking,
                                   String strLenght, String strDifficulty,
@@ -296,7 +308,7 @@ public class HikeEditActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //alert box that asks if user wants to delete the hike
     private void displaydeletenotification() {
         new AlertDialog.Builder(this).setTitle("Are you sure you want to delete this hike?").setMessage(
                 "If you delete the hike won't be recoverable!").setNegativeButton("Back",
@@ -310,7 +322,7 @@ public class HikeEditActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //deletes the hike after user confirms the deletion
     private void DeleteEntry() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         TextView id = (TextView) findViewById(R.id.textViewid);
@@ -323,7 +335,7 @@ public class HikeEditActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
+    //saves the edited details into the database by amending the database.
     private void saveDetails() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
@@ -366,7 +378,7 @@ public class HikeEditActivity extends AppCompatActivity {
     }
 
 
-    @Override
+    @Override //listens for drop down menu clicks on the toolbar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:

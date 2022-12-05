@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class HikeObservationAddActivity extends AppCompatActivity {
-
+    //defines the fields
     TextView tvid;
     TextView tvtime;
     @Override
@@ -31,6 +31,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hike_observation_add);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar7);
         setSupportActionBar(toolbar);
+        //sets the information of id and the current time in the UI fields
         int id2 = getIntent().getExtras().getInt("id2");
         tvid = findViewById(R.id.textViewhikeid);
         tvid.setText(String.valueOf(id2));
@@ -51,21 +52,22 @@ public class HikeObservationAddActivity extends AppCompatActivity {
 
     }
 
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
-
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
-
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
-
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -77,7 +79,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    @Override //listens for drop down menu clicks on the toolbar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:
@@ -102,7 +104,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    //gets the inputs the user entered into the fields
     private void getInputs() {
         try {
             TextView HikeID = (TextView) findViewById(R.id.textViewhikeid);
@@ -114,26 +116,21 @@ public class HikeObservationAddActivity extends AppCompatActivity {
             String strName = OBSName.getText().toString(),
                     strTime = OBSTime.getText().toString(),
                     strComments = HikeDate.getText().toString();
-
+            //checks if the inputs are entered before continueing
             if (strName.isEmpty() || strTime.isEmpty()) {
                 displaymissinginfo();
             }
+            //checks if the inputs are entered before continueing
             if (!strName.isEmpty() && !strTime.isEmpty()
                     && !strComments.isEmpty()) {
                 displayConfAlert(strName, strTime, strComments);
             }
-            if (!strName.isEmpty() && !strTime.isEmpty()
-                    && !strComments.isEmpty()) {
-
-                displayConfAlertnoDesc(strName, strTime);
-            }
-
-
+            //catch if nothing is entered
         } catch (NullPointerException n) {
             displayNothingAlert();
         }
     }
-
+    //displays the alert of confirmation
     private void displayConfAlertnoDesc(String strName, String strTime) {
         new AlertDialog.Builder(this).setTitle("Is the information correct?").setMessage(
                 "Details entered:\n" + "Observation Name:  " + strName
@@ -150,7 +147,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //displays the alert of confirmation
     private void displayConfAlert(String strName, String strTime,
                                   String strComments) {
 
@@ -170,7 +167,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //displays alert and asks for user to enter info
     private void displaymissinginfo() {
         new AlertDialog.Builder(this).setTitle("All required fields not filled!").setMessage(
                 "Please enter details in all required fields before submiting!").setNeutralButton("Back",
@@ -180,7 +177,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
                     }
                 }).show();
     }
-
+    //displays alert asking for user to enter information
     private void displayNothingAlert() {
         new AlertDialog.Builder(this).setTitle("No information entered!").setMessage(
                 "Please enter details before submiting!").setNeutralButton("Back",
@@ -190,7 +187,7 @@ public class HikeObservationAddActivity extends AppCompatActivity {
                     }
                 }).show();
     }
-
+    //Saves the observations into the db
     private void saveDetails() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 

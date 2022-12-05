@@ -55,20 +55,18 @@ import java.time.LocalDate;
 public class HikeInputActivity extends AppCompatActivity {
 
     FusedLocationProviderClient mFusedLocationClient;
-
+    //Defines the permission for location
     int PERMISSION_ID = 44;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hike_input);
         Button save = (Button)findViewById(R.id.buttonsubmit);
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         // method to get the location
         getLastLocation();
         save.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override // listener on create hike button click to get inputs
             public void onClick(View view) {
                 getInputs();
             }
@@ -76,6 +74,7 @@ public class HikeInputActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar4);
         setSupportActionBar(toolbar);
     }
+    //gets the last location
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
         // check if permissions are given
@@ -87,7 +86,6 @@ public class HikeInputActivity extends AppCompatActivity {
                 // getting last
                 // location from
                 // FusedLocationClient
-                // object
                 mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
@@ -95,6 +93,7 @@ public class HikeInputActivity extends AppCompatActivity {
                         if (location == null) {
                             requestNewLocationData();
                         } else {
+                            //enters the location information into the location field
                             EditText Hikelocation = (EditText) findViewById(R.id.editTextTextPersonNameLocation);
                             Hikelocation.setText(location.getLatitude() + "," +location.getLongitude() );
                         }
@@ -141,11 +140,6 @@ public class HikeInputActivity extends AppCompatActivity {
     // method to check for permissions
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        // If we want background location
-        // on Android 10.0 and higher,
-        // use:
-        // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
     // method to request for permissions
@@ -182,18 +176,22 @@ public class HikeInputActivity extends AppCompatActivity {
             getLastLocation();
         }
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -204,7 +202,7 @@ public class HikeInputActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
+    @Override //listens for drop down menu clicks on the toolbar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:
@@ -230,6 +228,7 @@ public class HikeInputActivity extends AppCompatActivity {
         }
     }
 
+    //creates the date picker on selection
     public static class DatePickerFragment extends DialogFragment implements
             DatePickerDialog.OnDateSetListener {
         @NonNull
@@ -243,7 +242,7 @@ public class HikeInputActivity extends AppCompatActivity {
             return new DatePickerDialog(getActivity(), this, year, --month, day);
         }
 
-        @Override
+        @Override   //gets the date selected
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             LocalDate dob = LocalDate.of(year, ++month, day);
             ((HikeInputActivity)getActivity()).updateDOB(dob);
@@ -251,6 +250,7 @@ public class HikeInputActivity extends AppCompatActivity {
         }
 
     }
+    //shows the calendar
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -259,6 +259,7 @@ public class HikeInputActivity extends AppCompatActivity {
         TextView dobText = (TextView)findViewById(R.id.textViewDateSelector);
         dobText.setText(dob.toString());
     }
+    //gets the information that is entered by the user and the app
     private void getInputs() {
         try {
             EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonNameHike);
@@ -284,17 +285,20 @@ public class HikeInputActivity extends AppCompatActivity {
                     strWeather = Weather.getText().toString(),
                     strHeartRate = HeartRate.getText().toString(),
                     strDesc = HikeDesc.getText().toString();
+            //checks if the fields are entered
             if (strName.isEmpty() || strDifficulty.isEmpty()
                     || strParking.isEmpty() || strLenght.isEmpty()
                     || strLocation.isEmpty() || strDate.isEmpty() || strWeather.isEmpty() || strHeartRate.isEmpty()) {
                 displaymissinginfo();
             }
+            //checks if the info is entered with description and then shows the alert box to double check enetered information
             if (!strName.isEmpty() && !strDifficulty.isEmpty()
                     && !strParking.isEmpty() && !strLenght.isEmpty()
                     && !strLocation.isEmpty() && !strDate.isEmpty() && !strWeather.isEmpty() && !strHeartRate.isEmpty()
                     && !strDesc.isEmpty()) {
                 displayConfAlert(strName, strLocation, strDate, strParking, strLenght, strDifficulty,strWeather,strHeartRate, strDesc);
             }
+            //checks if the info is entered without description and shows the information in alert box for double checking
             if (!strName.isEmpty() && !strDifficulty.isEmpty()
                     && !strParking.isEmpty() && !strLenght.isEmpty()
                     && !strLocation.isEmpty() && !strDate.isEmpty() && !strWeather.isEmpty() && !strHeartRate.isEmpty() && strDesc.isEmpty()) {
@@ -307,7 +311,7 @@ public class HikeInputActivity extends AppCompatActivity {
             displayNothingAlert();
         }
     }
-
+    //alert box that asks the user to enter all required information
     private void displaymissinginfo() {
         new AlertDialog.Builder(this).setTitle("All required fields not filled!").setMessage(
                 "Please enter details in all required fields before submiting!").setNeutralButton("Back",
@@ -316,7 +320,7 @@ public class HikeInputActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) { }
                 }).show();
     }
-
+    //alert box that asks the user to enter information
     private void displayNothingAlert() {
         new AlertDialog.Builder(this).setTitle("No information entered!").setMessage(
                 "Please enter details before submiting!").setNeutralButton("Back",
@@ -325,7 +329,7 @@ public class HikeInputActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) { }
                 }).show();
     }
-
+    //alert box that displays the informatin without description to double check.
     private void displayConfAlertnoDesc(String strName, String strLocation,
                                         String strDate, String strParking,
                                         String strLenght,String strWeather,String strHeartRate, String strDifficulty) {
@@ -349,7 +353,7 @@ public class HikeInputActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //alert box that displays entered info for confirmation with description.
     private void displayConfAlert(String strName, String strLocation,
                                   String strDate, String strParking,
                                   String strLenght, String strDifficulty,
@@ -376,7 +380,7 @@ public class HikeInputActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    //saves the details into the database by amending the selected hike for edit
     private void saveDetails() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 

@@ -1,6 +1,7 @@
 package com.example.comp1424_coursework;
 
 public class Hikes {
+    //creates the getters and seters for java database
     private int _id;
     private String _hikename;
     private String _hikelocation;

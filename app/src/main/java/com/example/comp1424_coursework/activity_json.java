@@ -38,11 +38,12 @@ import javax.net.ssl.X509TrustManager;
 public class activity_json extends AppCompatActivity {
     private WebView browser;
 
-    @Override
+    @Override //code that runs on screen opening
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
         browser = (WebView) findViewById(R.id.webkit5);
+        //tries to communicate open connection and send the information of all hikes to it.
         try {
             URL pageURL = new URL(getString(R.string.url));
             trustAllHosts();
@@ -54,18 +55,18 @@ public class activity_json extends AppCompatActivity {
             ArrayList<Hikes> hikeslist = dbHandler.getHikes();
             // Create the adapter
             HikesAdapter adapter = new HikesAdapter(this, hikeslist);
-
+            //Json array is created and the code is added to it.
             ArrayList Json = new ArrayList();
             Json.add("{\"userId\":\"dm5376y\",\"detailList\":[{\"name\":\"test\"}");
+            //adds all hike names to json array
             for (int i = 0; i < hikeslist.size(); i++) {
                 Hikes hikes = adapter.getItem(i);
                 Json.add("{\"name\":\"" +
                         hikes.get_hikename() + "\"}");
             }
             Json.add("}]}");
-            System.out.println(Json);
+            //converts array to string.
             String jsonString = String.join(", ", Json);
-            System.out.println(jsonString);
             JsonThread myTask = new JsonThread(this, con, jsonString);
             Thread t1 = new Thread(myTask, "JSON Thread");
             t1.start();
@@ -76,25 +77,24 @@ public class activity_json extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar10);
         setSupportActionBar(toolbar);
     }
-
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void JSON() {
-        Intent intent = new Intent(this, activity_json.class);
         startActivity(intent);
     }
 
@@ -103,7 +103,7 @@ public class activity_json extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
+    @Override//Listener that listens when an item in drop down menu of toolabar is selected
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:

@@ -35,7 +35,7 @@ public class HikeSearchActivity extends AppCompatActivity {
         });
 
     }
-
+    //gets the search inputs
     private void getInputs() {
         try {
 
@@ -50,16 +50,19 @@ public class HikeSearchActivity extends AppCompatActivity {
                     (RadioButton) findViewById(Filters.getCheckedRadioButtonId());
             String strParking = radioButtonInput.getText().toString(),
                     strName = HikeName.getText().toString();
+            //checks if empty
             if (!strName.isEmpty() && !strParking.isEmpty()) {
                 intent.putExtra("filter", radioButtonInput.getText().toString());
                 intent.putExtra("name", strname);
                 startActivity(intent);
             }
+            //catches error if empty
         } catch (Exception e) {
             displaymissinginfo();
         }
 
     }
+    //alert box to ask user to enter info
     private void displaymissinginfo() {
         new AlertDialog.Builder(this).setTitle("All fields not filled!").setMessage(
                 "Please enter details in all required fields before searching!").setNeutralButton("Back",
@@ -68,18 +71,22 @@ public class HikeSearchActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) { }
                 }).show();
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Hike List is selected from the drop down menu in toolbar
     private void HikeList() {
         Intent intent = new Intent(this, HikeListActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Create hike is selected from the drop down menu in toolbar
     private void HikeSearch() {
         Intent intent = new Intent(this, HikeSearchActivity.class);
         startActivity(intent);
     }
+    //Starts new intent(screen) when Main Menu is selected from the drop down menu in toolbar
     private void MainMenu() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -90,7 +97,7 @@ public class HikeSearchActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    @Override
+    @Override //listens for drop down menu clicks on the toolbar
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCreateHike:
