@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,20 +37,37 @@ public class HikeSearchActivity extends AppCompatActivity {
     }
 
     private void getInputs() {
-        EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonSearch);
+        try {
 
-        String strname = HikeName.getText().toString();
-        System.out.println("Im in search activity " + strname);
-        Intent intent = new Intent(this, HikeSearchListActivity.class);
-        RadioGroup Filters = (RadioGroup) findViewById(R.id.radioGroup4);
-        RadioButton radioButtonInput =
-                (RadioButton) findViewById(Filters.getCheckedRadioButtonId());
-        intent.putExtra("filter", radioButtonInput.getText().toString());
-        intent.putExtra("name", strname);
-        startActivity(intent);
+
+            EditText HikeName = (EditText) findViewById(R.id.editTextTextPersonSearch);
+
+            String strname = HikeName.getText().toString();
+            System.out.println("Im in search activity " + strname);
+            Intent intent = new Intent(this, HikeSearchListActivity.class);
+            RadioGroup Filters = (RadioGroup) findViewById(R.id.radioGroup4);
+            RadioButton radioButtonInput =
+                    (RadioButton) findViewById(Filters.getCheckedRadioButtonId());
+            String strParking = radioButtonInput.getText().toString(),
+                    strName = HikeName.getText().toString();
+            if (!strName.isEmpty() && !strParking.isEmpty()) {
+                intent.putExtra("filter", radioButtonInput.getText().toString());
+                intent.putExtra("name", strname);
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+            displaymissinginfo();
+        }
 
     }
-
+    private void displaymissinginfo() {
+        new AlertDialog.Builder(this).setTitle("All fields not filled!").setMessage(
+                "Please enter details in all required fields before searching!").setNeutralButton("Back",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                }).show();
+    }
     private void Hikeinput() {
         Intent intent = new Intent(this, HikeInputActivity.class);
         startActivity(intent);
