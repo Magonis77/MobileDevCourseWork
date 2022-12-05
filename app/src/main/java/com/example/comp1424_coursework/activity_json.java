@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -25,6 +26,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -39,15 +41,31 @@ public class activity_json extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        browser = (WebView) findViewById(R.id.webkit);
+        setContentView(R.layout.activity_json);
+        browser = (WebView) findViewById(R.id.webkit5);
         try {
             URL pageURL = new URL(getString(R.string.url));
             trustAllHosts();
             HttpURLConnection con = (HttpURLConnection) pageURL.openConnection();
 
-            String jsonString = getString(R.string.json);
+            DatabaseHelper dbHandler = new DatabaseHelper(this);
+            //add a product
+            //retrieve products from db
+            ArrayList<Hikes> hikeslist = dbHandler.getHikes();
+            // Create the adapter
+            HikesAdapter adapter = new HikesAdapter(this, hikeslist);
 
+            ArrayList Json = new ArrayList();
+            Json.add("{\"userId\":\"dm5376y\",\"detailList\":[{\"name\":\"test\"}");
+            for (int i = 0; i < hikeslist.size(); i++) {
+                Hikes hikes = adapter.getItem(i);
+                Json.add("{\"name\":\"" +
+                        hikes.get_hikename() + "\"}");
+            }
+            Json.add("}]}");
+            System.out.println(Json);
+            String jsonString = String.join(", ", Json);
+            System.out.println(jsonString);
             JsonThread myTask = new JsonThread(this, con, jsonString);
             Thread t1 = new Thread(myTask, "JSON Thread");
             t1.start();
@@ -55,7 +73,7 @@ public class activity_json extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar10);
         setSupportActionBar(toolbar);
     }
 

@@ -14,7 +14,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/webkit"
+        app:layout_constraintBottom_toTopOf="@+id/webkit5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         app:title="Hike JSON" />
 
     <WebView
-        android:id="@+id/webkit"
+        android:id="@+id/webkit5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"

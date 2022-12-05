@@ -7,15 +7,9 @@
         <item>Medium</item>
         <item>Hard</item>
     </string-array>
-    <string name="url">https://stuiis.cms.gre.ac.uk/COMP1424CoreWS/olympic</string>
-
+    <string name="url">https://stuiis.cms.gre.ac.uk/COMP1424CoreWS/comp1424cw</string>
     <string name="json">
-        {\"eventName\":\"mens 100 metres\",
-        \"resultList\":[{\"medalColour\":\"bronze\",
-        \"athleteName\":\"gatlin\"},
-        {\"medalColour\":\"silver\",
-        \"athleteName\":\"blake\"},
-        {\"medalColour\":\"gold\",
-        \"athleteName\":\"bolt\"}]}
+        {\"userId\":\"dm5376y\",
+        \"detailList\":[{\"name\":\"Snowdon\",}]}
     </string>
 </resources>
