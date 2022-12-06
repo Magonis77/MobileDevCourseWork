@@ -63,11 +63,14 @@ public class activity_json extends AppCompatActivity {
                 Hikes hikes = adapter.getItem(i);
                 Json.add("{\"name\":\"" +
                         hikes.get_hikename() + "\"}");
+                Json.add("{\"location\":\"" +
+                        hikes.get_hikelocation() + "\"}");
             }
-            Json.add("}]}");
             //converts array to string.
             String jsonString = String.join(", ", Json);
-            JsonThread myTask = new JsonThread(this, con, jsonString);
+            //adds the ending to have correct Json format
+            String newjsonString = jsonString + "]}";
+            JsonThread myTask = new JsonThread(this, con, newjsonString);
             Thread t1 = new Thread(myTask, "JSON Thread");
             t1.start();
 
